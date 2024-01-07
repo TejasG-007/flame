@@ -29,6 +29,14 @@ jobs:
       - name: Build Flutter Web
         run: flutter build web --release
 
+      - name: Create CNAME File
+        run: |
+          echo "dev.tejasgprod.online" > CNAME
+          ls 
+          git add CNAME
+          git commit -m "CNAME has been added"
+          
+
       - name: Push to Build Branch
         uses: s0/git-publish-subdir-action@develop
         env:
@@ -38,5 +46,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MESSAGE: "Build: ({sha}) {msg}"
           
-      - name: Create CNAME File
-        run: echo "dev.tejasgprod.online">>CNAME
+     
