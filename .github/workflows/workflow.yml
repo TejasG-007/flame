@@ -37,3 +37,6 @@ jobs:
           FOLDER: build/web
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MESSAGE: "Build: ({sha}) {msg}"
+          
+      - name: Create CNAME File
+        run: echo "dev.tejasgprod.online">>CNAME
