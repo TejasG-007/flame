@@ -31,10 +31,10 @@ jobs:
 
       - name: Create CNAME File
         run: |
-          echo "dev.tejasgprod.online" > CNAME
+          cd build/web
           ls 
-          git add CNAME
-          git commit -m "CNAME has been added"
+          echo "adding CNAME file"
+          echo "dev.tejasgprod.online" > CNAME
           
 
       - name: Push to Build Branch
