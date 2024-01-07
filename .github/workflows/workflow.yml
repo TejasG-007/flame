@@ -1,5 +1,10 @@
 name: Flutter Build Web
 
+permissions:
+  contents: write
+  pull-requests: write
+
+
 on:
   push:
     branches:
