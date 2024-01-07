@@ -25,9 +25,9 @@ jobs:
         run: flutter build web --release
 
       - name: Commit and Push to Dev
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+        run: 
+          git config user.name "TejasG-007"
+          git config user.email "tejasgathekar78@gmail.com"
           git checkout -b dev
           git add .
           git commit -m "Auto-generated build from main branch"
