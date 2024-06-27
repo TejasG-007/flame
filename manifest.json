@@ -1,11 +1,11 @@
 {
-    "name": "flame",
-    "short_name": "flame",
+    "name": "porfoliov7",
+    "short_name": "porfoliov7",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A Flame Official Site",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
