@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:http/http.dart' as http;
 
 class ColorConstant {
   static const backgroundColorA = Color(0xFFF6F5F4);
@@ -187,8 +188,7 @@ class _HomeViewState extends State<HomeView> {
   Widget _showIntro(){
     return Shimmer.fromColors(
       baseColor: Colors.black,
-      highlightColor: Colors.grey
-      ,
+      highlightColor: Colors.grey,
       child: Text('''Experienced Flutter Developer 📱 \n Expert in Mobile App Development & Integration 🛠️ \n Passionate about Launching New Projects 👨‍💻
     ''',textAlign: TextAlign.center,style: Theme.of(context).textTheme.headlineMedium,
       ),
@@ -199,7 +199,10 @@ class _HomeViewState extends State<HomeView> {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: InkWell(
-        onTap: (){},
+        onTap: ()async{
+          final url = Uri.parse("https://wa.me/+919146780318?text=Hello%20there!\n%20in%20from%20Portfolio%20");
+          await http.get(url);
+        },
         child: Container(
           alignment: Alignment.center,
           decoration: BoxDecoration(
