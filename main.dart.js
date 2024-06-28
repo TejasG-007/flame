@@ -61819,7 +61819,7 @@ s=s.bF$
 s.b=!0
 s.a.push(new A.a_d(q))
 q.d.KG(!0)},
-U(a){var s,r,q=this,p=null,o=t.af,n=A.tB(A.a([q.Vx(),A.fI(p,A.tB(A.a([q.xL("Linkdin",""),B.vE,q.xL("Github",""),B.vE,q.xL("Instagram","")],o),B.cW,B.bA),B.w,p,p,p,p,p,B.zP,p,p,p,p)],o),B.hB,B.bA),m=A.fI(p,p,B.w,p,p,p,p,250,p,p,p,p,400),l=A.a7C(B.i,p,A.a7C(p,new A.n5("assets/profilepic_1.jpg"),p,100),105),k=q.e
+U(a){var s,r,q=this,p=null,o=t.af,n=A.tB(A.a([q.Vx(),A.fI(p,A.tB(A.a([q.xL("Linkdin",""),B.vE,q.xL("Github",""),B.vE,q.xL("Instagram","")],o),B.cW,B.bA),B.w,p,p,p,p,p,B.zP,p,p,p,p)],o),B.hB,B.bA),m=A.fI(p,p,B.w,p,p,p,p,250,p,p,p,p,400),l=A.a7C(B.i,p,A.a7C(p,new A.n5("assets/profilepic.png"),p,100),105),k=q.e
 k===$&&A.b()
 k=k.b.V(k.a.gm())
 s=A.y8(40)
