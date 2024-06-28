@@ -62,7 +62,8 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin{
+
   _customAppBar() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,7 +74,7 @@ class _HomeViewState extends State<HomeView> {
   _navBarButtonLeft() {
     return Container(
       margin: const EdgeInsets.fromLTRB(50, 20, 20, 20),
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.only(left: 10,right: 2),
       //height: SizeConstant.leftNavBar.height,
       // width: SizeConstant.leftNavBar.width,
       decoration: BoxDecoration(
@@ -106,8 +107,13 @@ class _HomeViewState extends State<HomeView> {
           height: SizeConstant.roundedCornerButtonSize.height,
           width: SizeConstant.roundedCornerButtonSize.width,
           alignment: Alignment.center,
+          margin: EdgeInsets.all(5),
           decoration: BoxDecoration(
               color: ColorConstant.roundedButtonColor,
+              boxShadow: [BoxShadow(
+                color: Colors.white,
+                spreadRadius: 2
+              )],
               borderRadius: BorderRadius.circular(
                   SizeConstant.roundedCornerButtonSize.width)),
           child: Text(text,style: Theme.of(context).textTheme.bodySmall),
@@ -166,18 +172,17 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
         Positioned(
-          top: 50,
+          top: animationTop.value,
           right:5,
           child: Transform.rotate(
-            angle:235,
+            angle:-0.3,
             child: Container(
                 padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(40)
             ),
-            child: RotatedBox(quarterTurns: 2,
-            child: Text("Tejas Gathekar 👋",style: Theme.of(context).textTheme.bodySmall,)),
+            child: Text("Tejas Gathekar 👋",style: Theme.of(context).textTheme.bodySmall,),
           ),
           ),
         )
@@ -218,6 +223,24 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  late AnimationController animationController;
+  late Animation animationTop;
+
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(vsync: this,duration: const Duration(seconds: 2));
+    animationTop = Tween(begin: 60.0,end: 80.0).animate(animationController);
+    animationController.addListener((){
+
+      setState(() {
+
+      });
+    });
+    animationController.repeat(reverse: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -238,7 +261,12 @@ class _HomeViewState extends State<HomeView> {
               height: MediaQuery.sizeOf(context).height/1.2,
               decoration: BoxDecoration(
                   color: ColorConstant.navBarColorLeft,
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100),bottomRight: Radius.circular(100))
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100),bottomRight: Radius.circular(100)),
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.grey.shade300
+                  ),
+                )
               ),
             )
           ],
@@ -247,3 +275,6 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
+
+
+
