@@ -167,7 +167,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
           child: CircleAvatar(
             radius: 100,
             backgroundImage: NetworkImage(
-              "assets/profilepic.png",
+              "https://raw.githubusercontent.com/TejasG-007/flame/main/assets/profilepic.png",
             )
           ),
         ),
