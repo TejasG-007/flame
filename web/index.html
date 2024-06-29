@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -31,8 +31,41 @@
 
   <title>TejasG</title>
   <link rel="manifest" href="manifest.json">
+  <style>
+
+ /* Center the div */
+ body, html {
+   height: 100%;
+   margin: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: white;
+ }
+ /* Image animation */
+ @keyframes moveLeftRight {
+   0% { transform: translateX(0); }
+   50% { transform: translateX(100%); }
+   100% { transform: translateX(0); }
+ }
+ div {
+   text-align: center;
+ }
+ img {
+   width: auto;
+   animation: moveLeftRight 1s infinite;
+
+ }
+    h1{
+    font-family:sans-serif
+    }
+  </style>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+<div>
+  <img src="loading.gif" alt="loading file">
+  <h1 >Bee-boo-beep! Boop-beep-boo!</h1>
+</div>
+<script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
