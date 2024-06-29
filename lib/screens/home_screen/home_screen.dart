@@ -86,12 +86,12 @@ class _HomeScreenState extends State<HomeScreen>
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          height: isRounded ? 40 : SizeConstant.roundedCornerButtonSize.height,
-          width: isRounded ? 40 : SizeConstant.roundedCornerButtonSize.width,
+          height: isRounded ? 35 : SizeConstant.roundedCornerButtonSize.height,
+          width: isRounded ? 35 : SizeConstant.roundedCornerButtonSize.width,
           alignment: Alignment.center,
           margin: const EdgeInsets.all(5),
           decoration: BoxDecoration(
-              color: isEmail ? Colors.black : ColorConstant.roundedButtonColor,
+              color: isEmail ? Colors.black : Colors.grey.shade300,
               boxShadow: const [
                 BoxShadow(color: Colors.white, spreadRadius: 2)
               ],
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen>
           child: isRounded
               ? Image.asset(
                   "assets/${text.toLowerCase()}.png",
-                  scale: 25,
+                  scale: 30,
                 )
               : isEmail
                   ? SelectableText(text,
