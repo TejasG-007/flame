@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen>
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: SelectableText("tejasgathekar78@gmail.com",
+                        child: Text("tejasgathekar78@gmail.com",
                             style: Theme.of(context).textTheme.bodySmall),
                       ),
                       const SizedBox(
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     text: "tejasgathekar78@gmail.com"))
                                 .then((_) => ScaffoldMessenger.of(context)
                                     .showSnackBar(const SnackBar(
-                                        content: SelectableText("copied"))));
+                                        content: Text("copied"))));
                           }),
                     ],
                   ),
@@ -69,9 +69,8 @@ class _HomeScreenState extends State<HomeScreen>
       height: 40,
       width: width < 810 ? 70 : null,
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade300),
-          borderRadius: BorderRadius.circular(SizeConstant.leftNavBar.radius),
-          color: Colors.grey.withOpacity(.4)),
+        borderRadius: BorderRadius.circular(SizeConstant.leftNavBar.radius),
+      ),
       child: child,
     );
   }
@@ -91,9 +90,9 @@ class _HomeScreenState extends State<HomeScreen>
           alignment: Alignment.center,
           margin: const EdgeInsets.all(5),
           decoration: BoxDecoration(
-              color: isEmail ? Colors.black : Colors.grey.shade300,
-              boxShadow: const [
-                BoxShadow(color: Colors.white, spreadRadius: 2)
+              color: isEmail ? Colors.black : Colors.white,
+              boxShadow: [
+                BoxShadow(color: Colors.grey.shade300, spreadRadius: 2)
               ],
               borderRadius: BorderRadius.circular(
                   SizeConstant.roundedCornerButtonSize.width)),
@@ -103,12 +102,12 @@ class _HomeScreenState extends State<HomeScreen>
                   scale: 30,
                 )
               : isEmail
-                  ? SelectableText(text,
+                  ? Text(text,
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall
                           ?.copyWith(color: Colors.white))
-                  : SelectableText(text, style: Theme.of(context).textTheme.bodySmall),
+                  : Text(text, style: Theme.of(context).textTheme.bodySmall),
         ),
       ),
     );
@@ -122,36 +121,36 @@ class _HomeScreenState extends State<HomeScreen>
           width < 810
               ? customRoundedButton(
                   text: "Linkedin", onPressed: () {}, isRounded: true)
-              : customSelectableTextButton("Linkdin", "", width),
+              : customTextButton("Linkdin", "", width),
           width < 810
               ? const SizedBox(
                   width: 10,
                 )
-              : const SizedBox(width: 20, child: SelectableText(" / ")),
+              : const SizedBox(width: 20, child: Text(" / ")),
           width < 810
               ? customRoundedButton(
                   text: "Github", onPressed: () {}, isRounded: true)
-              : customSelectableTextButton("Github", "", width),
+              : customTextButton("Github", "", width),
           width < 810
               ? const SizedBox(
                   width: 10,
                 )
-              : const SizedBox(width: 20, child: SelectableText(" / ")),
+              : const SizedBox(width: 20, child: Text(" / ")),
           width < 810
               ? customRoundedButton(
                   text: "Instagram", onPressed: () {}, isRounded: true)
-              : customSelectableTextButton("Instagram", "", width),
+              : customTextButton("Instagram", "", width),
         ],
       ),
     );
   }
 
-  MouseRegion customSelectableTextButton(String label, String url, double width) {
+  MouseRegion customTextButton(String label, String url, double width) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: () {},
-        child: SelectableText(label, style: Theme.of(context).textTheme.bodySmall),
+        child: Text(label, style: Theme.of(context).textTheme.bodySmall),
       ),
     );
   }
@@ -182,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen>
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(40)),
-              child: SelectableText(
+              child: Text(
                 "Tejas Gathekar 👋",
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -197,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen>
     return Shimmer.fromColors(
       baseColor: Colors.black,
       highlightColor: Colors.grey,
-      child: SelectableText(
+      child: Text(
         '''Crafting mobile apps with Flutter, \nintegrating experiences.''',
         textAlign: TextAlign.center,
         style: Theme.of(context)
@@ -225,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           width: 200,
           height: 60,
-          child: SelectableText(
+          child: Text(
             "WhatsApp-💬",
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyLarge,
@@ -290,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Container(
                   color: Colors.red,
                   child: const Row(
-                    children: [SelectableText("Work")],
+                    children: [Text("Work")],
                   ),
                 )
               ],
