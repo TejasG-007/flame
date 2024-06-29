@@ -14,58 +14,60 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  _customAppBar() {
+  _customAppBar(double width) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [_navBarButtonLeft(), _navBarButtonRight()],
+      children: [_navBarButtonLeft(width), _navBarButtonRight(width)],
     );
   }
 
-  _navBarButtonLeft() {
-    final width = MediaQuery.sizeOf(context).width;
+  _navBarButtonLeft(double width) {
     return Container(
       margin: EdgeInsets.fromLTRB(width < 810 ? 10 : 50, 20, 20, 20),
       child: Row(
         children: [
           width < 810
-              ? _grayBackGroundContainer(customRoundedButton(
-                  text: "Email", isEmail: true, onPressed: () {}))
-              : _grayBackGroundContainer(Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("tejasgathekar78@gmail.com",
-                          style: Theme.of(context).textTheme.bodySmall),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    customRoundedButton(
-                        text: "Copy",
-                        onPressed: () async {
-                          await Clipboard.setData(const ClipboardData(
-                                  text: "tejasgathekar78@gmail.com"))
-                              .then((_) => ScaffoldMessenger.of(context)
-                                  .showSnackBar(
-                                      const SnackBar(content: Text("copied"))));
-                        }),
-                  ],
-                )),
+              ? _grayBackGroundContainer(
+                  customRoundedButton(
+                      text: "Email", isEmail: true, onPressed: () {}),
+                  width)
+              : _grayBackGroundContainer(
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SelectableText("tejasgathekar78@gmail.com",
+                            style: Theme.of(context).textTheme.bodySmall),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      customRoundedButton(
+                          text: "Copy",
+                          onPressed: () async {
+                            await Clipboard.setData(const ClipboardData(
+                                    text: "tejasgathekar78@gmail.com"))
+                                .then((_) => ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                        content: SelectableText("copied"))));
+                          }),
+                    ],
+                  ),
+                  width),
           const SizedBox(
             width: 5,
           ),
           _grayBackGroundContainer(
-              customRoundedButton(text: "CV", onPressed: () {})),
+              customRoundedButton(text: "CV", onPressed: () {}), width),
         ],
       ),
     );
   }
 
-  _grayBackGroundContainer(Widget child) {
-    final width = MediaQuery.sizeOf(context).width;
+  _grayBackGroundContainer(Widget child, double width) {
     return Container(
       height: 40,
-      width: width<810?70:null,
+      width: width < 810 ? 70 : null,
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.shade300),
           borderRadius: BorderRadius.circular(SizeConstant.leftNavBar.radius),
@@ -101,19 +103,18 @@ class _HomeScreenState extends State<HomeScreen>
                   scale: 25,
                 )
               : isEmail
-                  ? Text(text,
+                  ? SelectableText(text,
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall
                           ?.copyWith(color: Colors.white))
-                  : Text(text, style: Theme.of(context).textTheme.bodySmall),
+                  : SelectableText(text, style: Theme.of(context).textTheme.bodySmall),
         ),
       ),
     );
   }
 
-  _navBarButtonRight() {
-    final width = MediaQuery.sizeOf(context).width;
+  _navBarButtonRight(double width) {
     return Container(
       margin: EdgeInsets.fromLTRB(20, 20, width < 810 ? 20 : 50, 20),
       child: Row(
@@ -121,37 +122,36 @@ class _HomeScreenState extends State<HomeScreen>
           width < 810
               ? customRoundedButton(
                   text: "Linkedin", onPressed: () {}, isRounded: true)
-              : customTextButton("Linkdin", ""),
+              : customSelectableTextButton("Linkdin", "", width),
           width < 810
               ? const SizedBox(
                   width: 10,
                 )
-              : const SizedBox(width: 20, child: Text(" / ")),
+              : const SizedBox(width: 20, child: SelectableText(" / ")),
           width < 810
               ? customRoundedButton(
                   text: "Github", onPressed: () {}, isRounded: true)
-              : customTextButton("Github", ""),
+              : customSelectableTextButton("Github", "", width),
           width < 810
               ? const SizedBox(
                   width: 10,
                 )
-              : const SizedBox(width: 20, child: Text(" / ")),
+              : const SizedBox(width: 20, child: SelectableText(" / ")),
           width < 810
               ? customRoundedButton(
                   text: "Instagram", onPressed: () {}, isRounded: true)
-              : customTextButton("Instagram", ""),
+              : customSelectableTextButton("Instagram", "", width),
         ],
       ),
     );
   }
 
-  MouseRegion customTextButton(String label, String url) {
-    final width = MediaQuery.sizeOf(context).width;
+  MouseRegion customSelectableTextButton(String label, String url, double width) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: () {},
-        child: Text(label, style: Theme.of(context).textTheme.bodySmall),
+        child: SelectableText(label, style: Theme.of(context).textTheme.bodySmall),
       ),
     );
   }
@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen>
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(40)),
-              child: Text(
+              child: SelectableText(
                 "Tejas Gathekar 👋",
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -193,14 +193,17 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _showIntro() {
+  Widget _showIntro(double width) {
     return Shimmer.fromColors(
       baseColor: Colors.black,
       highlightColor: Colors.grey,
-      child: Text(
+      child: SelectableText(
         '''Crafting mobile apps with Flutter, \nintegrating experiences.''',
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headlineMedium,
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: width < 810 ? 30 : null),
       ),
     );
   }
@@ -222,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           width: 200,
           height: 60,
-          child: Text(
+          child: SelectableText(
             "WhatsApp-💬",
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyLarge,
@@ -252,45 +255,47 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
         backgroundColor: ColorConstant.backgroundColorA,
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                height: MediaQuery.sizeOf(context).height / 1.2,
-                decoration: BoxDecoration(
-                    color: ColorConstant.navBarColorLeft,
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(100),
-                        bottomRight: Radius.circular(100)),
-                    border: Border(
-                      bottom: BorderSide(color: Colors.grey.shade300),
-                    )),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    _customAppBar(),
-                    _profilePic(),
-                    _showIntro(),
-                    const SizedBox(
-                      height: 80,
-                    ),
-                    _showButton(),
-                  ],
+          child: LayoutBuilder(builder: (context, size) {
+            return Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.sizeOf(context).height / 1.2,
+                  decoration: BoxDecoration(
+                      color: ColorConstant.navBarColorLeft,
+                      borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(100),
+                          bottomRight: Radius.circular(100)),
+                      border: Border(
+                        bottom: BorderSide(color: Colors.grey.shade300),
+                      )),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _customAppBar(size.maxWidth),
+                      _profilePic(),
+                      _showIntro(size.maxWidth),
+                      const SizedBox(
+                        height: 80,
+                      ),
+                      _showButton(),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              Container(
-                color: Colors.red,
-                child: const Row(
-                  children: [Text("Work")],
+                const SizedBox(
+                  height: 50,
                 ),
-              )
-            ],
-          ),
+                Container(
+                  color: Colors.red,
+                  child: const Row(
+                    children: [SelectableText("Work")],
+                  ),
+                )
+              ],
+            );
+          }),
         ));
   }
 }
