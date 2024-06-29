@@ -22,31 +22,38 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   _navBarButtonLeft() {
+    final width = MediaQuery.sizeOf(context).width;
     return Container(
-      margin: const EdgeInsets.fromLTRB(50, 20, 20, 20),
+      margin: EdgeInsets.fromLTRB(width < 810 ? 10 : 50, 20, 20, 20),
       child: Row(
         children: [
-          _grayBackGroundContainer(Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("tejasgathekar78@gmail.com",
-                    style: Theme.of(context).textTheme.bodySmall),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              customRoundedButton(
-                  text: "Copy",
-                  onPressed: () async {
-                    await Clipboard.setData(const ClipboardData(
-                            text: "tejasgathekar78@gmail.com"))
-                        .then((_) => ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("copied"))));
-                  }),
-            ],
-          )),
-          SizedBox(width: 10,),
+          width < 810
+              ? _grayBackGroundContainer(customRoundedButton(
+                  text: "Email", isEmail: true, onPressed: () {}))
+              : _grayBackGroundContainer(Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("tejasgathekar78@gmail.com",
+                          style: Theme.of(context).textTheme.bodySmall),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    customRoundedButton(
+                        text: "Copy",
+                        onPressed: () async {
+                          await Clipboard.setData(const ClipboardData(
+                                  text: "tejasgathekar78@gmail.com"))
+                              .then((_) => ScaffoldMessenger.of(context)
+                                  .showSnackBar(
+                                      const SnackBar(content: Text("copied"))));
+                        }),
+                  ],
+                )),
+          const SizedBox(
+            width: 5,
+          ),
           _grayBackGroundContainer(
               customRoundedButton(text: "CV", onPressed: () {})),
         ],
@@ -55,58 +62,91 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   _grayBackGroundContainer(Widget child) {
+    final width = MediaQuery.sizeOf(context).width;
     return Container(
       height: 40,
-
+      width: width<810?70:null,
       decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300),
           borderRadius: BorderRadius.circular(SizeConstant.leftNavBar.radius),
           color: Colors.grey.withOpacity(.4)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [child],
-      ),
+      child: child,
     );
   }
 
-  customRoundedButton({required String text, required VoidCallback onPressed}) {
+  customRoundedButton(
+      {required String text,
+      required VoidCallback onPressed,
+      isEmail = false,
+      isRounded = false}) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          height: SizeConstant.roundedCornerButtonSize.height,
-          width: SizeConstant.roundedCornerButtonSize.width,
+          height: isRounded ? 40 : SizeConstant.roundedCornerButtonSize.height,
+          width: isRounded ? 40 : SizeConstant.roundedCornerButtonSize.width,
           alignment: Alignment.center,
           margin: const EdgeInsets.all(5),
           decoration: BoxDecoration(
-              color: ColorConstant.roundedButtonColor,
+              color: isEmail ? Colors.black : ColorConstant.roundedButtonColor,
               boxShadow: const [
                 BoxShadow(color: Colors.white, spreadRadius: 2)
               ],
               borderRadius: BorderRadius.circular(
                   SizeConstant.roundedCornerButtonSize.width)),
-          child: Text(text, style: Theme.of(context).textTheme.bodySmall),
+          child: isRounded
+              ? Image.asset(
+                  "assets/${text.toLowerCase()}.png",
+                  scale: 25,
+                )
+              : isEmail
+                  ? Text(text,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: Colors.white))
+                  : Text(text, style: Theme.of(context).textTheme.bodySmall),
         ),
       ),
     );
   }
 
   _navBarButtonRight() {
+    final width = MediaQuery.sizeOf(context).width;
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 20, 50, 20),
+      margin: EdgeInsets.fromLTRB(20, 20, width < 810 ? 20 : 50, 20),
       child: Row(
         children: [
-          customTextButton("Linkdin", ""),
-          const SizedBox(width: 20, child: Text(" / ")),
-          customTextButton("Github", ""),
-          const SizedBox(width: 20, child: Text(" / ")),
-          customTextButton("Instagram", ""),
+          width < 810
+              ? customRoundedButton(
+                  text: "Linkedin", onPressed: () {}, isRounded: true)
+              : customTextButton("Linkdin", ""),
+          width < 810
+              ? const SizedBox(
+                  width: 10,
+                )
+              : const SizedBox(width: 20, child: Text(" / ")),
+          width < 810
+              ? customRoundedButton(
+                  text: "Github", onPressed: () {}, isRounded: true)
+              : customTextButton("Github", ""),
+          width < 810
+              ? const SizedBox(
+                  width: 10,
+                )
+              : const SizedBox(width: 20, child: Text(" / ")),
+          width < 810
+              ? customRoundedButton(
+                  text: "Instagram", onPressed: () {}, isRounded: true)
+              : customTextButton("Instagram", ""),
         ],
       ),
     );
   }
 
   MouseRegion customTextButton(String label, String url) {
+    final width = MediaQuery.sizeOf(context).width;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -236,8 +276,17 @@ class _HomeScreenState extends State<HomeScreen>
                     const SizedBox(
                       height: 80,
                     ),
-                    _showButton()
+                    _showButton(),
                   ],
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Container(
+                color: Colors.red,
+                child: const Row(
+                  children: [Text("Work")],
                 ),
               )
             ],
