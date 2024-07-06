@@ -172,21 +172,26 @@ class _HomeScreenState extends State<HomeScreen>
                 "https://raw.githubusercontent.com/TejasG-007/flame/main/assets/profilepic.png",
               )),
         ),
-        Positioned(
-          top: animationTop.value,
-          right: 5,
-          child: Transform.rotate(
-            angle: -0.3,
-            child: Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(40)),
-              child: Text(
-                "Tejas Gathekar 👋",
-                style: Theme.of(context).textTheme.bodySmall,
+        AnimatedBuilder(
+          animation: animationTop,
+          builder: (context,_) {
+            return Positioned(
+              top: animationTop.value,
+              right: 5,
+              child: Transform.rotate(
+                angle: -0.3,
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      color: Colors.white, borderRadius: BorderRadius.circular(40)),
+                  child: Text(
+                    "Tejas Gathekar 👋",
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          }
         )
       ],
     );
@@ -197,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen>
       baseColor: Colors.black,
       highlightColor: Colors.grey,
       child: Text(
-        '''Crafting mobile apps with Flutter, \nintegrating experiences.''',
+        '''Crafting mobile apps \nwith Flutter, \nintegrating experiences.''',
         textAlign: TextAlign.center,
         style: Theme.of(context)
             .textTheme
@@ -243,9 +248,6 @@ class _HomeScreenState extends State<HomeScreen>
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
     animationTop = Tween(begin: 60.0, end: 80.0).animate(animationController);
-    animationController.addListener(() {
-      setState(() {});
-    });
     animationController.repeat(reverse: true);
   }
 
