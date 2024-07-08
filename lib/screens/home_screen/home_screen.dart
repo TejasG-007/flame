@@ -173,26 +173,26 @@ class _HomeScreenState extends State<HomeScreen>
               )),
         ),
         AnimatedBuilder(
-          animation: animationTop,
-          builder: (context,_) {
-            return Positioned(
-              top: animationTop.value,
-              right: 5,
-              child: Transform.rotate(
-                angle: -0.3,
-                child: Container(
-                  padding: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                      color: Colors.white, borderRadius: BorderRadius.circular(40)),
-                  child: Text(
-                    "Tejas Gathekar 👋",
-                    style: Theme.of(context).textTheme.bodySmall,
+            animation: animationTop,
+            builder: (context, _) {
+              return Positioned(
+                top: animationTop.value,
+                right: 5,
+                child: Transform.rotate(
+                  angle: -0.3,
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(40)),
+                    child: Text(
+                      "Tejas Gathekar 👋",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                 ),
-              ),
-            );
-          }
-        )
+              );
+            })
       ],
     );
   }
@@ -232,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen>
           child: Text(
             "WhatsApp-💬",
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white),
           ),
         ),
       ),
@@ -254,49 +254,92 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorConstant.backgroundColorA,
-        body: SingleChildScrollView(
-          child: LayoutBuilder(builder: (context, size) {
-            return Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: MediaQuery.sizeOf(context).height / 1.2,
-                  decoration: BoxDecoration(
-                      color: ColorConstant.navBarColorLeft,
-                      borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(100),
-                          bottomRight: Radius.circular(100)),
-                      border: Border(
-                        bottom: BorderSide(color: Colors.grey.shade300),
-                      )),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 20,
+      backgroundColor: ColorConstant.backgroundColorA,
+      body: Stack(
+        children: [
+          Container(
+            height: MediaQuery.sizeOf(context).height,
+            width: MediaQuery.sizeOf(context).width,
+            color: ColorConstant.navBarColorLeft,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: LayoutBuilder(builder: (context, size) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      alignment: Alignment.topCenter,
+                      height: MediaQuery.sizeOf(context).height,
+                      decoration: BoxDecoration(
+                          color: ColorConstant.backgroundColorA,
+                          border: Border(
+                            bottom: BorderSide(color: Colors.grey.shade300),
+                          ),
+                          borderRadius:const BorderRadius.only(
+                              bottomRight: Radius.circular(100),
+                              bottomLeft: Radius.circular(100))),
+                      child: Container(
+                          height: MediaQuery.sizeOf(context).height / 1.3,
+                          width: MediaQuery.sizeOf(context).width,
+                          decoration: BoxDecoration(
+                              color: ColorConstant.navBarColorLeft,
+                              border: Border(
+                                bottom: BorderSide(color: Colors.grey.shade300),
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                  bottomRight: Radius.circular(100),
+                                  bottomLeft: Radius.circular(100))),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              _customAppBar(size.maxWidth),
+                              _profilePic(),
+                              _showIntro(size.maxWidth),
+                              const SizedBox(
+                                height: 80,
+                              ),
+                              _showButton(),
+                            ],
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 400,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(40),
+                      alignment: Alignment.bottomCenter,
+                      decoration: BoxDecoration(
+                          color: ColorConstant.backgroundColorA,
+                          border: Border(
+                            bottom: BorderSide(color: Colors.grey.shade300),
+                          ),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(100),
+                              topRight: Radius.circular(100))),
+                      height: MediaQuery.sizeOf(context).height / 2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+
+                           Divider(
+                            indent: 40,
+                            endIndent: 40,
+                            color: Colors.grey.shade400
+                          ),
+                          Text("©2024 All right reserved.",style: Theme.of(context).textTheme.bodyMedium,),
+                        ],
                       ),
-                      _customAppBar(size.maxWidth),
-                      _profilePic(),
-                      _showIntro(size.maxWidth),
-                      const SizedBox(
-                        height: 80,
-                      ),
-                      _showButton(),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  color: Colors.red,
-                  child: const Row(
-                    children: [Text("Work")],
-                  ),
-                )
-              ],
-            );
-          }),
-        ));
+                    ),
+                  ],
+                );
+              }),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
