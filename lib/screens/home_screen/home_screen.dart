@@ -80,15 +80,18 @@ class _HomeScreenState extends State<HomeScreen>
       required VoidCallback onPressed,
       isEmail = false,
       isRounded = false}) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
+    return Material(
+      borderRadius: BorderRadius.circular(SizeConstant.roundedCornerButtonSize.width),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: InkWell(
         onTap: onPressed,
+        hoverColor: Colors.black,
+        borderRadius: BorderRadius.circular(SizeConstant.roundedCornerButtonSize.width),
         child: Container(
           height: isRounded ? 35 : SizeConstant.roundedCornerButtonSize.height,
           width: isRounded ? 35 : SizeConstant.roundedCornerButtonSize.width,
           alignment: Alignment.center,
-          margin: const EdgeInsets.all(5),
+          margin: const EdgeInsets.all(4),
           decoration: BoxDecoration(
               color: isEmail ? Colors.black : Colors.white,
               boxShadow: [
@@ -145,11 +148,15 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  MouseRegion customTextButton(String label, String url, double width) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () {},
+  Material customTextButton(String label, String url, double width) {
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(SizeConstant.roundedCornerButtonSize.width),
+      child: InkWell(
+        hoverColor: Colors.transparent,
+        borderRadius: BorderRadius.circular(SizeConstant.roundedCornerButtonSize.width),
+        onTap: () {
+        },
         child: Text(label, style: Theme.of(context).textTheme.bodySmall),
       ),
     );
@@ -213,8 +220,7 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _showButton() {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
+    return Material(
       child: InkWell(
         onTap: () async {
           final url = Uri.parse(
@@ -323,12 +329,12 @@ class _HomeScreenState extends State<HomeScreen>
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-
                            Divider(
-                            indent: 40,
-                            endIndent: 40,
-                            color: Colors.grey.shade400
+                            indent: size.maxWidth/7,
+                            endIndent: size.maxWidth/7,
+                            color: Colors.grey.shade300
                           ),
+                          const SizedBox(height: 20,),
                           Text("©2024 All right reserved.",style: Theme.of(context).textTheme.bodyMedium,),
                         ],
                       ),
