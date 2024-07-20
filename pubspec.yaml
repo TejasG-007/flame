@@ -38,6 +38,9 @@ dependencies:
   shimmer: ^3.0.0
   http: ^1.2.1
   bloc: ^8.1.4
+  url_launcher: ^6.3.0
+  flutter_bloc: ^8.1.6
+
 
 dev_dependencies:
   flutter_test:

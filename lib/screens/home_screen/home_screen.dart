@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:porfoliov7/bloc/data_collector/data_collector_bloc.dart';
+import 'package:porfoliov7/bloc/data_collector/data_collector_event.dart';
+import 'package:porfoliov7/bloc/data_collector/data_collector_state.dart';
+import 'package:porfoliov7/networks/data_networks_nwt.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:http/http.dart' as http;
 import '../components/constant/color_constant.dart';
@@ -14,6 +19,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+
+
   _customAppBar(double width) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen>
           width < 810
               ? customRoundedButton(
                   text: "Linkedin", onPressed: () {}, isRounded: true)
-              : customTextButton("Linkdin", "", width),
+              : customTextButton("Linkedin", "", width),
           width < 810
               ? const SizedBox(
                   width: 10,
@@ -222,10 +229,8 @@ class _HomeScreenState extends State<HomeScreen>
   Widget _showButton() {
     return Material(
       child: InkWell(
-        onTap: () async {
-          final url = Uri.parse(
-              "https://wa.me/+919146780318?text=Hello%20there!\n%20in%20from%20Portfolio%20");
-          await http.get(url);
+        onTap: (){
+          dataNetworks.navigateWhatsApp();
         },
         child: Container(
           alignment: Alignment.center,
@@ -247,6 +252,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   late AnimationController animationController;
   late Animation animationTop;
+  final dataNetworks = DataNetworks();
 
   @override
   void initState() {
@@ -267,82 +273,82 @@ class _HomeScreenState extends State<HomeScreen>
             height: MediaQuery.sizeOf(context).height,
             width: MediaQuery.sizeOf(context).width,
             color: ColorConstant.navBarColorLeft,
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: LayoutBuilder(builder: (context, size) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      alignment: Alignment.topCenter,
-                      height: MediaQuery.sizeOf(context).height,
-                      decoration: BoxDecoration(
-                          color: ColorConstant.backgroundColorA,
-                          border: Border(
-                            bottom: BorderSide(color: Colors.grey.shade300),
-                          ),
-                          borderRadius:const BorderRadius.only(
-                              bottomRight: Radius.circular(100),
-                              bottomLeft: Radius.circular(100))),
-                      child: Container(
-                          height: MediaQuery.sizeOf(context).height / 1.3,
-                          width: MediaQuery.sizeOf(context).width,
-                          decoration: BoxDecoration(
-                              color: ColorConstant.navBarColorLeft,
-                              border: Border(
-                                bottom: BorderSide(color: Colors.grey.shade300),
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                  bottomRight: Radius.circular(100),
-                                  bottomLeft: Radius.circular(100))),
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              _customAppBar(size.maxWidth),
-                              _profilePic(),
-                              _showIntro(size.maxWidth),
-                              const SizedBox(
-                                height: 80,
-                              ),
-                              _showButton(),
-                            ],
-                          )),
+            child: LayoutBuilder(builder: (context, size) {
+              return ListView(
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  Container(
+                    alignment: Alignment.topCenter,
+                    height: MediaQuery.sizeOf(context).height,
+                    decoration: BoxDecoration(
+                        color: ColorConstant.backgroundColorA,
+                        border: Border(
+                          bottom: BorderSide(color: Colors.grey.shade300),
+                        ),
+                        borderRadius:const BorderRadius.only(
+                            bottomRight: Radius.circular(100),
+                            bottomLeft: Radius.circular(100))),
+                    child: Column(
+                      children: [
+                        Container(
+                            height: MediaQuery.sizeOf(context).height / 1.3,
+                            width: MediaQuery.sizeOf(context).width,
+                            decoration: BoxDecoration(
+                                color: ColorConstant.navBarColorLeft,
+                                border: Border(
+                                  bottom: BorderSide(color: Colors.grey.shade300),
+                                ),
+                                borderRadius: const BorderRadius.only(
+                                    bottomRight: Radius.circular(100),
+                                    bottomLeft: Radius.circular(100))),
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                _customAppBar(size.maxWidth),
+                                _profilePic(),
+                                _showIntro(size.maxWidth),
+                                const SizedBox(
+                                  height: 70,
+                                ),
+                                _showButton(),
+                              ],
+                            )),
+                      ],
                     ),
-                    const SizedBox(
-                      height: 400,
+                  ),
+                  const SizedBox(
+                    height: 400,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(40),
+                    alignment: Alignment.bottomCenter,
+                    decoration: BoxDecoration(
+                        color: ColorConstant.backgroundColorA,
+                        border: Border(
+                          bottom: BorderSide(color: Colors.grey.shade300),
+                        ),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(100),
+                            topRight: Radius.circular(100))),
+                    height: MediaQuery.sizeOf(context).height / 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                         Divider(
+                          indent: size.maxWidth/7,
+                          endIndent: size.maxWidth/7,
+                          color: Colors.grey.shade300
+                        ),
+                        const SizedBox(height: 20,),
+                        Text("©2024 All right reserved.",style: Theme.of(context).textTheme.bodyMedium,),
+                      ],
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(40),
-                      alignment: Alignment.bottomCenter,
-                      decoration: BoxDecoration(
-                          color: ColorConstant.backgroundColorA,
-                          border: Border(
-                            bottom: BorderSide(color: Colors.grey.shade300),
-                          ),
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(100),
-                              topRight: Radius.circular(100))),
-                      height: MediaQuery.sizeOf(context).height / 2,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                           Divider(
-                            indent: size.maxWidth/7,
-                            endIndent: size.maxWidth/7,
-                            color: Colors.grey.shade300
-                          ),
-                          const SizedBox(height: 20,),
-                          Text("©2024 All right reserved.",style: Theme.of(context).textTheme.bodyMedium,),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              }),
-            ),
+                  ),
+                ],
+              );
+            }),
           )
         ],
       ),
