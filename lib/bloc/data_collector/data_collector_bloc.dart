@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:porfoliov7/bloc/data_collector/data_collector_event.dart';
 import 'package:porfoliov7/bloc/data_collector/data_collector_state.dart';
@@ -16,18 +17,17 @@ class DataCollectorBloc extends Bloc<DataCollectorEvent, DataCollectorState> {
   }
 
   Future<void> _onInitState(DataCollectionInitEvent event, Emitter<DataCollectorState> emit) async {
-    print("calling...");  // Debug statement
     try {
       final gitData = await dataNetworks.getDataFromGitHub();
       if (gitData != null) {
-        print("Data received: ${gitData.personalData.name}");  // Debug statement
+        log("Data received: ${gitData.personalData.name}");  // Debug statement
         emit(DataCollectionCompletedState(gitData: gitData));
       } else {
-        print("Data is null");  // Debug statement
+        log("Data is null");  // Debug statement
         emit(DataCollectionFailedState());
       }
     } catch (e) {
-      print("Error: $e");  // Debug statement
+      log("Error: $e");  // Debug statement
       emit(DataCollectionFailedState());
     }
   }

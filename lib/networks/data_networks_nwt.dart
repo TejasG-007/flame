@@ -32,4 +32,12 @@ class DataNetworks {
     await launchUrl(url);
 
   }
+
+  Future<void> navigateToDownloadCV(String url) async{
+    await launchUrl(Uri.parse(url));
+  }
+
+  Future<void> navigatingToSocial(String url)async{
+    await launchUrl(Uri.parse(url));
+  }
 }

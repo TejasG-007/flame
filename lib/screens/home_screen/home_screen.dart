@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:porfoliov7/bloc/data_collector/data_collector_bloc.dart';
-import 'package:porfoliov7/bloc/data_collector/data_collector_event.dart';
 import 'package:porfoliov7/bloc/data_collector/data_collector_state.dart';
 import 'package:porfoliov7/networks/data_networks_nwt.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:http/http.dart' as http;
 import '../components/constant/color_constant.dart';
 import '../components/constant/size_constant.dart';
 
@@ -21,14 +19,14 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
 
 
-  _customAppBar(double width) {
+  _customAppBar(double width,DataCollectionCompletedState state) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [_navBarButtonLeft(width), _navBarButtonRight(width)],
+      children: [_navBarButtonLeft(width,state), _navBarButtonRight(width,state)],
     );
   }
 
-  _navBarButtonLeft(double width) {
+  _navBarButtonLeft(double width,DataCollectionCompletedState state) {
     return Container(
       margin: EdgeInsets.fromLTRB(width < 810 ? 10 : 50, 20, 20, 20),
       child: Row(
@@ -65,7 +63,9 @@ class _HomeScreenState extends State<HomeScreen>
             width: 5,
           ),
           _grayBackGroundContainer(
-              customRoundedButton(text: "CV", onPressed: () {}), width),
+              customRoundedButton(text: "CV", onPressed: () {
+                dataNetworks.navigateToDownloadCV(state.gitData!.personalData.socialLinks.resume);
+              }), width),
         ],
       ),
     );
@@ -123,15 +123,17 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  _navBarButtonRight(double width) {
+  _navBarButtonRight(double width,DataCollectionCompletedState state) {
     return Container(
       margin: EdgeInsets.fromLTRB(20, 20, width < 810 ? 20 : 50, 20),
       child: Row(
         children: [
           width < 810
               ? customRoundedButton(
-                  text: "Linkedin", onPressed: () {}, isRounded: true)
-              : customTextButton("Linkedin", "", width),
+                  text: "Linkedin", onPressed: (){
+            dataNetworks.navigatingToSocial(state.gitData!.personalData.socialLinks.linkedin);
+          }, isRounded: true)
+              : customTextButton("Linkedin",state.gitData!.personalData.socialLinks.linkedin, width),
           width < 810
               ? const SizedBox(
                   width: 10,
@@ -139,8 +141,10 @@ class _HomeScreenState extends State<HomeScreen>
               : const SizedBox(width: 20, child: Text(" / ")),
           width < 810
               ? customRoundedButton(
-                  text: "Github", onPressed: () {}, isRounded: true)
-              : customTextButton("Github", "", width),
+                  text: "Github", onPressed: () {
+            dataNetworks.navigatingToSocial(state.gitData!.personalData.socialLinks.github);
+          }, isRounded: true)
+              : customTextButton("Github", state.gitData!.personalData.socialLinks.github, width),
           width < 810
               ? const SizedBox(
                   width: 10,
@@ -148,8 +152,10 @@ class _HomeScreenState extends State<HomeScreen>
               : const SizedBox(width: 20, child: Text(" / ")),
           width < 810
               ? customRoundedButton(
-                  text: "Instagram", onPressed: () {}, isRounded: true)
-              : customTextButton("Instagram", "", width),
+                  text: "Instagram", onPressed: () {
+            dataNetworks.navigatingToSocial(state.gitData!.personalData.socialLinks.instagram);
+          }, isRounded: true)
+              : customTextButton("Instagram", state.gitData!.personalData.socialLinks.instagram, width),
         ],
       ),
     );
@@ -162,7 +168,8 @@ class _HomeScreenState extends State<HomeScreen>
       child: InkWell(
         hoverColor: Colors.transparent,
         borderRadius: BorderRadius.circular(SizeConstant.roundedCornerButtonSize.width),
-        onTap: () {
+        onTap: (){
+          dataNetworks.navigatingToSocial(url);
         },
         child: Text(label, style: Theme.of(context).textTheme.bodySmall),
       ),
@@ -301,19 +308,29 @@ class _HomeScreenState extends State<HomeScreen>
                                 borderRadius: const BorderRadius.only(
                                     bottomRight: Radius.circular(100),
                                     bottomLeft: Radius.circular(100))),
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                _customAppBar(size.maxWidth),
-                                _profilePic(),
-                                _showIntro(size.maxWidth),
-                                const SizedBox(
-                                  height: 70,
-                                ),
-                                _showButton(),
-                              ],
+                            child: BlocBuilder<DataCollectorBloc,DataCollectorState>(
+                              builder: (context,state){
+                                if (state is DataCollectionInitState) {
+                                  return const Text("Loading..");
+                                } else if (state is DataCollectionCompletedState) {
+                                  return Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      _customAppBar(size.maxWidth,state),
+                                      _profilePic(),
+                                      _showIntro(size.maxWidth),
+                                      const SizedBox(
+                                        height: 70,
+                                      ),
+                                      _showButton(),
+                                    ],
+                                  );
+                                } else {
+                                  return const SizedBox.shrink();
+                                }
+                              },
                             )),
                       ],
                     ),

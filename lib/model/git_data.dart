@@ -21,16 +21,36 @@ class GitData {
   }
 }
 
+class SocialLinks{
+  final String linkedin;
+  final String github;
+  final String instagram;
+  final String resume;
+  SocialLinks({
+    required this.linkedin,
+    required this.github,
+    required this.resume,
+    required this.instagram,
+});
+  factory SocialLinks.fromMap(Map<String,dynamic> map)=>SocialLinks(linkedin: map["linkedin"],
+      github: map["github"], instagram: map["instagram"],resume: map["resume"]);
+
+}
+
+
 class PersonalData {
   String name;
   List<String> desc;
+  SocialLinks socialLinks;
 
   PersonalData({
     required this.name,
     required this.desc,
+    required this.socialLinks,
   });
 
   factory PersonalData.fromMap(Map<String, dynamic> data) => PersonalData(
+    socialLinks: SocialLinks.fromMap(data["social-links"]),
       name: data["name"], desc: List<String>.from(data["desc"].map((e) => e)));
 }
 
