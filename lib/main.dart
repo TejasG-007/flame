@@ -17,6 +17,15 @@ class Starter extends StatelessWidget {
       create: (_) => DataCollectorBloc()..add(DataCollectionInitEvent()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        // home: Navigator(
+        //   pages: [
+        //     MaterialPage(
+        //         key: UniqueKey(),
+        //         child:const Scaffold()
+        //     ),
+        //   ],
+        //   onPopPage: (route,result)=>route.didPop(result),
+        // ),
         initialRoute: "/",
         onGenerateRoute: (settings) {
           if (settings.name == "/ppt") {
