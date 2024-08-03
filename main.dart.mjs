@@ -554,7 +554,6 @@ _1737: (a, i) => a.push(i),
 _1741: a => a.pop(),
 _1742: (a, i) => a.splice(i, 1),
 _1744: (a, s) => a.join(s),
-_1745: (a, s, e) => a.slice(s, e),
 _1747: (a, b) => a == b ? 0 : (a > b ? 1 : -1),
 _1748: a => a.length,
 _1750: (a, i) => a[i],
@@ -568,11 +567,6 @@ _1760: s => s.trimLeft(),
 _1761: s => s.trimRight(),
 _1763: (s, p, i) => s.indexOf(p, i),
 _1764: (s, p, i) => s.lastIndexOf(p, i),
-_1765: (o, offsetInBytes, lengthInBytes) => {
-      var dst = new ArrayBuffer(lengthInBytes);
-      new Uint8Array(dst).set(new Uint8Array(o, offsetInBytes, lengthInBytes));
-      return new DataView(dst);
-    },
 _1766: (o, start, length) => new Uint8Array(o.buffer, o.byteOffset + start, length),
 _1767: (o, start, length) => new Int8Array(o.buffer, o.byteOffset + start, length),
 _1768: (o, start, length) => new Uint8ClampedArray(o.buffer, o.byteOffset + start, length),
