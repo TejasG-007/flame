@@ -3,7 +3,7 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"flutter_bootstrap.js": "c391ce2ef65059bfdeb895814bd12856",
+const RESOURCES = {"flutter_bootstrap.js": "75cec91ba3e3532abdf4a815f9586975",
 "assets/assets/instagram.png": "0634a5babf36db50e415356b348e3f30",
 "assets/assets/github.png": "dda4ed64a67ac5d80e8eac27dfbe677e",
 "assets/assets/backgroundAnimation.png": "9fc151d4056f88b1dddf17b0d20dff98",
@@ -32,13 +32,13 @@ const RESOURCES = {"flutter_bootstrap.js": "c391ce2ef65059bfdeb895814bd12856",
 "canvaskit/chromium/canvaskit.wasm": "399e2344480862e2dfa26f12fa5891d7",
 "canvaskit/canvaskit.wasm": "9251bb81ae8464c4df3b072f84aa969b",
 "canvaskit/skwasm.js": "5d4f9263ec93efeb022bb14a3881d240",
-"main.dart.wasm": "b5ed624e4aada37a75801b1470fdc499",
+"main.dart.wasm": "699999ecd7eb8343b049312c10c306c0",
 "loading.gif": "fd726bda47b7af536b5700b787c8c50e",
 "icons/Icon-512.png": "0dca8fe5bf7a79acee45747131b5cb5e",
 "icons/Icon-192.png": "023335d7a574264f58993efb3240e6c4",
 "favicon.png": "0dca8fe5bf7a79acee45747131b5cb5e",
 "manifest.json": "0e37729631328ec718fc9bbb2ad32948",
-"main.dart.js": "13fc54d0df87c89bd3e08b13fd102521",
+"main.dart.js": "15a7b9310114b155222c08265202eb9e",
 "version.json": "d3f51ea4c387a8f14b47386e2efb5241"};
 // The application shell files that are downloaded before a service worker can
 // start.
