@@ -3,7 +3,7 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"flutter_bootstrap.js": "35f33c1dbc0393620723357bdd8cc93d",
+const RESOURCES = {"flutter_bootstrap.js": "5bc95ad5fc92445760fbfe1043931685",
 "assets/assets/instagram.png": "0634a5babf36db50e415356b348e3f30",
 "assets/assets/github.png": "dda4ed64a67ac5d80e8eac27dfbe677e",
 "assets/assets/backgroundAnimation.png": "9fc151d4056f88b1dddf17b0d20dff98",
@@ -19,8 +19,8 @@ const RESOURCES = {"flutter_bootstrap.js": "35f33c1dbc0393620723357bdd8cc93d",
 "assets/shaders/ink_sparkle.frag": "ecc85a2e95f5e9f53123dcaf8cb9b6ce",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "e986ebe42ef785b27164c36a9abc7818",
 "flutter.js": "383e55f7f3cce5be08fcf1f3881f585c",
-"index.html": "e8c5a90333b202c3d3cd2f37897a0cb8",
-"/": "e8c5a90333b202c3d3cd2f37897a0cb8",
+"index.html": "02c9a276fcb003c09e9f17a440b491f5",
+"/": "02c9a276fcb003c09e9f17a440b491f5",
 "main.dart.mjs": "e78b8e39ad183a174224b355fc42bc53",
 "canvaskit/skwasm.worker.js": "bfb704a6c714a75da9ef320991e88b03",
 "canvaskit/skwasm.wasm": "4051bfc27ba29bf420d17aa0c3a98bce",
