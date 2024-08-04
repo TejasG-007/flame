@@ -103,29 +103,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   }
                                 },
                               )),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const SizedBox(
-                                height: 200,
-                              ),
-                              Stack(
-                                children: [
-                                   Container(
-                                    child: Transform.rotate(
-                                        angle: -0.3, child:  Text("Experience",style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.black))),
-                                  ),
-                                  Container(
-                                    height:200,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                        shrinkWrap: true,
-                                        itemCount:2,itemBuilder: (context,index)=>ListTile(subtitle: Text("hey"),)),
-                                  )
-                                ],
-                              )
-                            ],
-                          )
+
                         ],
                       ),
                     ),
