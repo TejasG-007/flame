@@ -3,7 +3,7 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"flutter_bootstrap.js": "e45bebdd66e7c43b0af6a790278363e1",
+const RESOURCES = {"flutter_bootstrap.js": "d37c23fc1c264e7d21f207d1749d2f8b",
 "assets/assets/instagram.png": "0634a5babf36db50e415356b348e3f30",
 "assets/assets/github.png": "dda4ed64a67ac5d80e8eac27dfbe677e",
 "assets/assets/backgroundAnimation.png": "9fc151d4056f88b1dddf17b0d20dff98",
@@ -19,8 +19,8 @@ const RESOURCES = {"flutter_bootstrap.js": "e45bebdd66e7c43b0af6a790278363e1",
 "assets/shaders/ink_sparkle.frag": "ecc85a2e95f5e9f53123dcaf8cb9b6ce",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "e986ebe42ef785b27164c36a9abc7818",
 "flutter.js": "383e55f7f3cce5be08fcf1f3881f585c",
-"index.html": "285e8399d4ac337509a92121dec871af",
-"/": "285e8399d4ac337509a92121dec871af",
+"index.html": "2dd701668597272f4843d7e47d8ff01e",
+"/": "2dd701668597272f4843d7e47d8ff01e",
 "main.dart.mjs": "e78b8e39ad183a174224b355fc42bc53",
 "canvaskit/skwasm.worker.js": "bfb704a6c714a75da9ef320991e88b03",
 "canvaskit/skwasm.wasm": "4051bfc27ba29bf420d17aa0c3a98bce",
@@ -32,13 +32,13 @@ const RESOURCES = {"flutter_bootstrap.js": "e45bebdd66e7c43b0af6a790278363e1",
 "canvaskit/chromium/canvaskit.wasm": "399e2344480862e2dfa26f12fa5891d7",
 "canvaskit/canvaskit.wasm": "9251bb81ae8464c4df3b072f84aa969b",
 "canvaskit/skwasm.js": "5d4f9263ec93efeb022bb14a3881d240",
-"main.dart.wasm": "df22e9f2107e8ab243831db6eadbe7ac",
+"main.dart.wasm": "0d33aa84ed3d46dad6a71e00e528af36",
 "loading.gif": "fd726bda47b7af536b5700b787c8c50e",
 "icons/Icon-512.png": "0dca8fe5bf7a79acee45747131b5cb5e",
 "icons/Icon-192.png": "023335d7a574264f58993efb3240e6c4",
 "favicon.png": "0dca8fe5bf7a79acee45747131b5cb5e",
 "manifest.json": "0e37729631328ec718fc9bbb2ad32948",
-"main.dart.js": "b9e7348b08577aaaa9daafd302573c56",
+"main.dart.js": "ed8929d85caea0d26e86eaba73107089",
 "version.json": "d3f51ea4c387a8f14b47386e2efb5241"};
 // The application shell files that are downloaded before a service worker can
 // start.
