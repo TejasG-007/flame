@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               child: BlocBuilder<DataCollectorBloc, DataCollectorState>(
                                 builder: (context, state) {
                                   if (state is DataCollectionInitState) {
-                                    return const Text("Loading..");
+                                    return const Center(child: Text("Loading.."));
                                   } else if (state is DataCollectionCompletedState) {
                                     return SingleChildScrollView(
                                       child: Column(
