@@ -37,8 +37,12 @@ final GoRouter _router = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-      path: '/ppt',
-      builder: (context, state) => const PrivacyPolicy(),
+      path: '/terms:appName',
+
+      builder: (context, state) {
+        final appName = state.pathParameters["appName"];
+        return  PrivacyPolicy(appName:appName??"TejasG");
+      },
     ),
   ],
   errorBuilder: (context, state) => const ErrorScreen(),
