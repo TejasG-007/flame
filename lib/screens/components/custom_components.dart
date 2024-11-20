@@ -84,7 +84,7 @@ class NavBarButtonLeft extends StatelessWidget {
             child: CustomRoundedButton(
               text: "CV",
               onPressed: () {
-                dataNetworks.navigateToDownloadCV(state.gitData!.personalData.socialLinks.resume);
+                dataNetworks.navigateToDownloadCV(state.gitData.personalData.socialLinks.resume);
               },
             ),
           ),
@@ -190,13 +190,13 @@ class NavBarButtonRight extends StatelessWidget {
               ? CustomRoundedButton(
             text: "Linkedin",
             onPressed: () {
-              dataNetworks.navigatingToSocial(state.gitData!.personalData.socialLinks.linkedin);
+              dataNetworks.navigatingToSocial(state.gitData.personalData.socialLinks.linkedin);
             },
             isRounded: true,
           )
               : CustomTextButton(
             label: "Linkedin",
-            url: state.gitData!.personalData.socialLinks.linkedin,
+            url: state.gitData.personalData.socialLinks.linkedin,
             dataNetworks: dataNetworks,
           ),
           width < 810 ? const SizedBox(width: 10) : const SizedBox(width: 20, child: Text(" / ")),
@@ -204,13 +204,13 @@ class NavBarButtonRight extends StatelessWidget {
               ? CustomRoundedButton(
             text: "Github",
             onPressed: () {
-              dataNetworks.navigatingToSocial(state.gitData!.personalData.socialLinks.github);
+              dataNetworks.navigatingToSocial(state.gitData.personalData.socialLinks.github);
             },
             isRounded: true,
           )
               : CustomTextButton(
             label: "Github",
-            url: state.gitData!.personalData.socialLinks.github,
+            url: state.gitData.personalData.socialLinks.github,
             dataNetworks: dataNetworks,
           ),
           width < 810 ? const SizedBox(width: 10) : const SizedBox(width: 20, child: Text(" / ")),
@@ -218,13 +218,13 @@ class NavBarButtonRight extends StatelessWidget {
               ? CustomRoundedButton(
             text: "Instagram",
             onPressed: () {
-              dataNetworks.navigatingToSocial(state.gitData!.personalData.socialLinks.instagram);
+              dataNetworks.navigatingToSocial(state.gitData.personalData.socialLinks.instagram);
             },
             isRounded: true,
           )
               : CustomTextButton(
             label: "Instagram",
-            url: state.gitData!.personalData.socialLinks.instagram,
+            url: state.gitData.personalData.socialLinks.instagram,
             dataNetworks: dataNetworks,
           ),
         ],
@@ -315,10 +315,12 @@ class ProfilePic extends StatelessWidget {
 
 class ShowIntro extends StatelessWidget {
   final double width;
+  final String introText;
 
   const ShowIntro({
     super.key,
     required this.width,
+    required this.introText
   });
 
   @override
@@ -327,11 +329,11 @@ class ShowIntro extends StatelessWidget {
       baseColor: Colors.black,
       highlightColor: Colors.grey,
       child: Text(
-        '''Crafting mobile apps \nwith Flutter, \nintegrating experiences.''',
+        introText,
         textAlign: TextAlign.center,
         style: Theme.of(context)
             .textTheme
-            .headlineMedium
+            .headlineLarge
             ?.copyWith(fontSize: width < 810 ? 30 : null),
       ),
     );
@@ -364,10 +366,10 @@ class ShowButton extends StatelessWidget {
             color: Colors.black,
             borderRadius: BorderRadius.circular(60),
           ),
-          width: 200,
-          height: 60,
+          width: 150,
+          height: 40,
           child: Text(
-            "WhatsApp-💬",
+            "Let's Connect",
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white),
           ),
