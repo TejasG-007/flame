@@ -34,6 +34,8 @@
 
 </head>
 <body>
+<script>{{flutter_bootstrap_js}}</script>
+</body>
 <script>
   {{flutter_js}}
  {{flutter_build_config}}
@@ -48,6 +50,7 @@
  loading.style.transform = 'translate(-50%, -50%)';
  loading.style.display = 'flex';
  loading.style.alignItems = 'center';
+ loading.style.flexDirection = 'column';
  loading.style.justifyContent = 'center';
  loading.style.width = '100%';
  loading.style.height = '100%';
@@ -57,21 +60,24 @@
  img.alt = 'Loading...';
  img.style.width = '100px';
  img.style.height = '100px';
- loading.appendChild(img);
+
+const text = document.createElement('p');
+text.textContent = 'Hey...\n Just a Sec!'; // Your loading message
+text.style.marginTop = '10px'; // Add some space between SVG and text
+text.style.fontSize = '16px'; // Adjust font size as needed
+text.style.color = '#333'; // Set text color
+loading.appendChild(img);
+loading.appendChild(text);
 
  _flutter.loader.load({
    onEntrypointLoaded: async function(engineInitializer) {
      img.alt = 'Initializing engine...';
      const appRunner = await engineInitializer.initializeEngine();
-
      img.alt = 'Running app...';
      await appRunner.runApp();
-
      loading.remove();
    }
  });
 
 </script>
-<script>{{flutter_bootstrap_js}}</script>
-</body>
 </html>
