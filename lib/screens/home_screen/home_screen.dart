@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen>
                           GridView.builder(
                               shrinkWrap: true,
                               itemCount: 4,
-                             physics:const NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: screenWidth <= 650
@@ -108,28 +108,39 @@ class _HomeScreenState extends State<HomeScreen>
                                           : screenWidth <= 1080
                                               ? 2
                                               : 4,
-                                  crossAxisSpacing: 10,
-                                  mainAxisExtent: 250),
-                              itemBuilder: (context, index) =>
-                                  Material(
-                                    borderRadius: BorderRadius.circular(42),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: InkWell(
-                                      onTap: (){},
-                                      hoverColor: Colors.black,
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 10,
+                                      mainAxisExtent: 250),
+                              itemBuilder: (context, index) => Container(
+                                margin:const EdgeInsets.only(bottom: 8),
+                                child: Material(
                                       borderRadius: BorderRadius.circular(42),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        margin: const EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                          color:  Colors.white,
-                                          boxShadow: [BoxShadow(color: Colors.grey.shade300, spreadRadius: 2)],
-                                          borderRadius: BorderRadius.circular(40),
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      child: InkWell(
+                                        onTap: () {},
+                                        hoverColor: Colors.black,
+                                        borderRadius: BorderRadius.circular(42),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          margin: const EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.grey.shade300,
+                                                  spreadRadius: 2)
+                                            ],
+                                            borderRadius:
+                                                BorderRadius.circular(40),
+                                          ),
+                                          child: Text("Proek",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall),
                                         ),
-                                       child:Text("Proek", style: Theme.of(context).textTheme.bodySmall),
                                       ),
                                     ),
-                                  ))
+                              ))
                         ],
                       )),
                   _FooterContainer(screenWidth: size.maxWidth),
@@ -193,8 +204,7 @@ class _MainContent extends StatelessWidget {
       child: BlocBuilder<DataCollectorBloc, DataCollectorState>(
         builder: (context, state) {
           if (state is DataCollectionInitState) {
-            return const Center(
-                child:Text("Fetching Data..."));
+            return const Center(child: Text("Fetching Data..."));
           } else if (state is DataCollectionCompletedState) {
             return _DataDisplay(
               screenWidth: screenWidth,

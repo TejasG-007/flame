@@ -1,4 +1,3 @@
-
 class CustomBoxConstraint {
   final double height;
   final double width;

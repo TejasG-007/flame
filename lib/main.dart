@@ -38,10 +38,9 @@ final GoRouter _router = GoRouter(
     ),
     GoRoute(
       path: '/terms:appName',
-
       builder: (context, state) {
         final appName = state.pathParameters["appName"];
-        return  PrivacyPolicy(appName:appName??"TejasG");
+        return PrivacyPolicy(appName: appName ?? "TejasG");
       },
     ),
   ],

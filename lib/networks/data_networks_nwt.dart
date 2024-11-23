@@ -5,7 +5,6 @@ import 'package:porfoliov7/model/git_data.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DataNetworks {
-
   final String url =
       "https://raw.githubusercontent.com/TejasG-007/ProjectData/main/projectdata.json";
 
@@ -30,14 +29,13 @@ class DataNetworks {
     final url = Uri.parse(
         "https://wa.me/+919146780318?text=Hello%20there!\n%20in%20from%20Portfolio%20");
     await launchUrl(url);
-
   }
 
-  Future<void> navigateToDownloadCV(String url) async{
+  Future<void> navigateToDownloadCV(String url) async {
     await launchUrl(Uri.parse(url));
   }
 
-  Future<void> navigatingToSocial(String url)async{
+  Future<void> navigatingToSocial(String url) async {
     await launchUrl(Uri.parse(url));
   }
 }

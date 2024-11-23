@@ -5,7 +5,6 @@ import 'package:porfoliov7/bloc/data_collector/data_collector_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:porfoliov7/networks/data_networks_nwt.dart';
 
-
 class DataCollectorBloc extends Bloc<DataCollectorEvent, DataCollectorState> {
   final dataNetworks = DataNetworks();
 
@@ -15,21 +14,20 @@ class DataCollectorBloc extends Bloc<DataCollectorEvent, DataCollectorState> {
     //         (event, emit) => emit(DataCollectionFailedState()));
   }
 
-  Future<void> _onInitState(DataCollectionInitEvent event, Emitter<DataCollectorState> emit) async {
+  Future<void> _onInitState(
+      DataCollectionInitEvent event, Emitter<DataCollectorState> emit) async {
     try {
       final gitData = await dataNetworks.getDataFromGitHub();
       if (gitData != null) {
-        log("Data fetch successfully :) ");  // Debug statement
+        log("Data fetch successfully :) "); // Debug statement
         emit(DataCollectionCompletedState(gitData: gitData));
       } else {
-        log("Data is null :(");  // Debug statement
+        log("Data is null :("); // Debug statement
         emit(DataCollectionFailedState());
       }
     } catch (e) {
-      log("Error: $e :|");  // Debug statement
+      log("Error: $e :|"); // Debug statement
       emit(DataCollectionFailedState());
     }
   }
 }
-
-

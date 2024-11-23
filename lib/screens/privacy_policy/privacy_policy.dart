@@ -43,7 +43,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                   ),
                   TextSpan(
                     text:
-                    'Welcome to Tejas-G Production ("we", "our", "us"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share your personal information when you use our application ("${widget.appName}").\n\n',
+                        'Welcome to Tejas-G Production ("we", "our", "us"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share your personal information when you use our application ("${widget.appName}").\n\n',
                   ),
                   const TextSpan(
                     text: '2. Information We Collect\n\n',
@@ -51,7 +51,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                   ),
                   const TextSpan(
                     text:
-                    'We may collect and process the following types of information:\n\n',
+                        'We may collect and process the following types of information:\n\n',
                   ),
                   const TextSpan(
                     text: 'a. Personal Information:\n',
@@ -66,7 +66,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                   ),
                   const TextSpan(
                     text:
-                    '- App usage patterns and analytics\n- Device information (e.g., device type, operating system)\n\n',
+                        '- App usage patterns and analytics\n- Device information (e.g., device type, operating system)\n\n',
                   ),
                   const TextSpan(
                     text: '3. How We Use Your Information\n\n',
@@ -74,7 +74,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                   ),
                   const TextSpan(
                     text:
-                    'We use the collected information for various purposes, including:\n- To provide, operate, and maintain our App\n- To improve, personalize, and expand our App\n- To understand and analyze how you use our App\n- To develop new products, services, features, and functionality\n\nWe are not using any of the information which gets saved. All information is kept confidential and secure.\n\n',
+                        'We use the collected information for various purposes, including:\n- To provide, operate, and maintain our App\n- To improve, personalize, and expand our App\n- To understand and analyze how you use our App\n- To develop new products, services, features, and functionality\n\nWe are not using any of the information which gets saved. All information is kept confidential and secure.\n\n',
                   ),
                   const TextSpan(
                     text: '4. Data Security\n\n',
@@ -82,7 +82,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                   ),
                   const TextSpan(
                     text:
-                    'We take reasonable measures to protect your information from unauthorized access, alteration, disclosure, or destruction. We implement security measures such as encryption and secure access controls to ensure the confidentiality of your data.\n\n',
+                        'We take reasonable measures to protect your information from unauthorized access, alteration, disclosure, or destruction. We implement security measures such as encryption and secure access controls to ensure the confidentiality of your data.\n\n',
                   ),
                   const TextSpan(
                     text: '5. Sharing Your Information\n\n',
@@ -90,7 +90,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                   ),
                   const TextSpan(
                     text:
-                    'We do not share your personal information with third parties, except in the following cases:\n- With your consent\n- To comply with legal obligations\n- To protect and defend our rights and property\n- To prevent or investigate possible wrongdoing in connection with the App\n\n',
+                        'We do not share your personal information with third parties, except in the following cases:\n- With your consent\n- To comply with legal obligations\n- To protect and defend our rights and property\n- To prevent or investigate possible wrongdoing in connection with the App\n\n',
                   ),
                   const TextSpan(
                     text: '6. Your Data Protection Rights\n\n',
@@ -98,7 +98,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                   ),
                   const TextSpan(
                     text:
-                    'Depending on your location, you may have the following rights regarding your personal information:\n- The right to access – You have the right to request copies of your personal data.\n- The right to rectification – You have the right to request that we correct any information you believe is inaccurate or complete information you believe.\n',
+                        'Depending on your location, you may have the following rights regarding your personal information:\n- The right to access – You have the right to request copies of your personal data.\n- The right to rectification – You have the right to request that we correct any information you believe is inaccurate or complete information you believe.\n',
                   ),
                 ],
               ),
