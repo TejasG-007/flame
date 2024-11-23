@@ -325,16 +325,19 @@ class ShowIntro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: Colors.black,
-      highlightColor: Colors.grey,
-      child: Text(
-        introText,
-        textAlign: TextAlign.center,
-        style: Theme.of(context)
-            .textTheme
-            .headlineLarge
-            ?.copyWith(fontSize: width < 810 ? 30 : null),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
+      child: Shimmer.fromColors(
+        baseColor: Colors.black,
+        highlightColor: Colors.grey,
+        child: Text(
+          introText,
+          textAlign: TextAlign.center,
+          style: Theme.of(context)
+              .textTheme
+              .headlineLarge
+              ?.copyWith(fontSize: width < 810 ? 30 : null),
+        ),
       ),
     );
   }

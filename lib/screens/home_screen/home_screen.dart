@@ -51,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen>
             builder: (context, size) {
               return ListView(
                 physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
                 children: [
                   _MainContent(
                     screenHeight: size.maxHeight,
@@ -106,7 +107,7 @@ class _MainContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.topCenter,
-      height: screenHeight * 2,
+      //height: screenHeight * 2,
       decoration: BoxDecoration(
         color: ColorConstant.backgroundColorA,
         border: Border(
@@ -120,10 +121,14 @@ class _MainContent extends StatelessWidget {
       child: BlocBuilder<DataCollectorBloc, DataCollectorState>(
         builder: (context, state) {
           if (state is DataCollectionInitState) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: LinearProgressIndicator(
+              color: ColorConstant.backgroundColorA,
+              backgroundColor: ColorConstant.navBarColorLeft,
+            ));
           } else if (state is DataCollectionCompletedState) {
             return _DataDisplay(
               screenWidth: screenWidth,
+              screenHeight: screenHeight,
               dataNetworks: dataNetworks,
               animationTop: animationTop,
               state: state,
@@ -141,12 +146,14 @@ class _MainContent extends StatelessWidget {
 
 class _DataDisplay extends StatelessWidget {
   final double screenWidth;
+  final double screenHeight;
   final DataNetworks dataNetworks;
   final Animation<double> animationTop;
   final DataCollectionCompletedState state;
 
   const _DataDisplay({
     required this.screenWidth,
+    required this.screenHeight,
     required this.dataNetworks,
     required this.animationTop,
     required this.state,
@@ -159,12 +166,11 @@ class _DataDisplay extends StatelessWidget {
         const SizedBox(height: 10),
         CustomAppBar(
             width: screenWidth, state: state, dataNetworks: dataNetworks),
-        ProfilePic(animationTop: animationTop),
+         ProfilePic(animationTop: animationTop),
         ShowIntro(
             width: screenWidth,
             introText:
                 "Crafting seamless experiences through Flutter expertise 🚀📱."),
-        const SizedBox(height: 20),
         ShowButton(dataNetworks: dataNetworks),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -189,90 +195,93 @@ class _DataDisplay extends StatelessWidget {
             color: ColorConstant.navBarColorLeft,
           ),
         ),
-        Expanded(
-          child: Flex(
-            mainAxisSize: MainAxisSize.max,
-            direction: screenWidth >= 650 ? Axis.horizontal : Axis.vertical,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: SizedBox(
-                  width: screenWidth >= 650 ? screenWidth / 2 : null,
-                  child: RichText(
-                      text: TextSpan(
-                          text: "${state.gitData.experience[0].name}\n",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                          children: [
-                        TextSpan(
-                            text: "${state.gitData.experience[0].from} - ",
-                            style:
-                                const TextStyle(fontWeight: FontWeight.normal)),
-                        TextSpan(
-                            text: "${state.gitData.experience[0].to}\n\n",
-                            style:
-                                const TextStyle(fontWeight: FontWeight.normal)),
-                        ...state.gitData.experience[0].desc.map((data) =>
-                            TextSpan(
-                                text: "╭ $data\n",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.normal)))
-                      ])),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: screenWidth >= 650 ? 5 : 0,
-                    horizontal: screenWidth >= 650 ? 0 : 5),
-                child: screenWidth >= 650
-                    ? const VerticalDivider(
-                        key: ValueKey('VerticalDivider'),
-                        width: 1,
-                        thickness: 1,
-                        color: ColorConstant.navBarColorLeft)
-                    : const Divider(
-                        key: ValueKey('HorizontalDivider'),
-                        height: 1,
-                        thickness: 1,
-                        color: ColorConstant.navBarColorLeft,
-                      ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: screenWidth >= 650 ? screenWidth / 2 : null,
-                    child: RichText(
-                        text: TextSpan(
-                            text: "${state.gitData.experience[1].name}\n",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                            children: [
-                          TextSpan(
-                              text: "${state.gitData.experience[1].from} - ",
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.normal)),
-                          TextSpan(
-                              text: "${state.gitData.experience[1].to}\n\n",
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.normal)),
-                          ...state.gitData.experience[1].desc.map((data) =>
-                              TextSpan(
-                                  text: "╭ $data\n",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.normal)))
-                        ])),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        )
+       Padding(
+         padding: const EdgeInsets.only(bottom: 20.0),
+         child: Flex(
+           direction: screenWidth >= 650 ? Axis.horizontal : Axis.vertical,
+           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+           crossAxisAlignment: CrossAxisAlignment.start,
+           children: [
+             Padding(
+               padding: const EdgeInsets.all(5.0),
+               child: SizedBox(
+                 width: screenWidth >= 650 ? (screenWidth / 2)-50 : null,
+                 child: RichText(
+                     text: TextSpan(
+                         text: "${state.gitData.experience[0].name}\n",
+                         style: Theme.of(context)
+                             .textTheme
+                             .bodyMedium
+                             ?.copyWith(fontWeight: FontWeight.bold),
+                         children: [
+                           TextSpan(
+                               text: "${state.gitData.experience[0].from} - ",
+                               style:
+                               const TextStyle(fontWeight: FontWeight.normal)),
+                           TextSpan(
+                               text: "${state.gitData.experience[0].to}\n\n",
+                               style:
+                               const TextStyle(fontWeight: FontWeight.normal)),
+                           ...state.gitData.experience[0].desc.map((data) =>
+                               TextSpan(
+                                   text: "╭ $data\n",
+                                   style: const TextStyle(
+                                       fontWeight: FontWeight.normal)))
+                         ])),
+               ),
+             ),
+             Padding(
+               padding: EdgeInsets.symmetric(
+                   vertical: screenWidth >= 650 ? 5 : 0,
+                   horizontal: screenWidth >= 650 ? 0 : 5),
+               child: screenWidth >= 650
+                   ?  const VerticalDivider(
+                 key: ValueKey('VerticalDivider'),
+                 endIndent: 10,
+                 indent: 10,
+                 width: 10,
+                 thickness: 1,
+                 color:Colors.black,
+                 // color: ColorConstant.navBarColorLeft
+               )
+                   : const Divider(
+                 key: ValueKey('HorizontalDivider'),
+                 height: 1,
+                 thickness: 1,
+                 color: ColorConstant.navBarColorLeft,
+               ),
+             ),
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: SizedBox(
+                 width: screenWidth >= 650 ? (screenWidth / 2)-50 : null,
+                 child: RichText(
+                     text: TextSpan(
+                         text: "${state.gitData.experience[1].name}\n",
+                         style: Theme.of(context)
+                             .textTheme
+                             .bodyMedium
+                             ?.copyWith(fontWeight: FontWeight.bold),
+                         children: [
+                           TextSpan(
+                               text: "${state.gitData.experience[1].from} - ",
+                               style:
+                               const TextStyle(fontWeight: FontWeight.normal)),
+                           TextSpan(
+                               text: "${state.gitData.experience[1].to}\n\n",
+                               style:
+                               const TextStyle(fontWeight: FontWeight.normal)),
+                           ...state.gitData.experience[1].desc.map((data) =>
+                               TextSpan(
+                                   text: "╭ $data\n",
+                                   style: const TextStyle(
+                                       fontWeight: FontWeight.normal)))
+                         ])),
+               ),
+             )
+           ],
+         ),
+       ),
       ],
     );
   }
