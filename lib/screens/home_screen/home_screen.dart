@@ -59,7 +59,78 @@ class _HomeScreenState extends State<HomeScreen>
                     dataNetworks: _dataNetworks,
                     animationTop: _animationTop,
                   ),
-                  const SizedBox(height: 600),
+                  Container(
+                      decoration: BoxDecoration(
+                        color: ColorConstant.backgroundColorA,
+                        border: Border(
+                          bottom: BorderSide(color: Colors.grey.shade300),
+                        ),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10, left: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Project's And Achievement's ",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall
+                                      ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: screenWidth >= 650 ? 5 : 0,
+                                horizontal: screenWidth >= 650 ? 0 : 5),
+                            child: const Divider(
+                              key: ValueKey('HorizontalDivider'),
+                              height: 1,
+                              thickness: 1,
+                              color: ColorConstant.navBarColorLeft,
+                            ),
+                          ),
+                          GridView.builder(
+                              shrinkWrap: true,
+                              itemCount: 4,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: screenWidth <= 650
+                                          ? 1
+                                          : screenWidth <= 1080
+                                              ? 2
+                                              : 4,
+                                  crossAxisSpacing: 10,
+                                  mainAxisExtent: 250),
+                              itemBuilder: (context, index) =>
+                                  Material(
+                                    borderRadius: BorderRadius.circular(42),
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    child: InkWell(
+                                      onTap: (){},
+                                      hoverColor: Colors.black,
+                                      borderRadius: BorderRadius.circular(42),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        margin: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                          color:  Colors.white,
+                                          boxShadow: [BoxShadow(color: Colors.grey.shade300, spreadRadius: 2)],
+                                          borderRadius: BorderRadius.circular(40),
+                                        ),
+                                       child:Text("Proek", style: Theme.of(context).textTheme.bodySmall),
+                                      ),
+                                    ),
+                                  ))
+                        ],
+                      )),
                   _FooterContainer(screenWidth: size.maxWidth),
                 ],
               );
@@ -114,17 +185,15 @@ class _MainContent extends StatelessWidget {
           bottom: BorderSide(color: Colors.grey.shade300),
         ),
         borderRadius: const BorderRadius.only(
-          bottomRight: Radius.circular(100),
-          bottomLeft: Radius.circular(100),
+          bottomRight: Radius.circular(50),
+          bottomLeft: Radius.circular(50),
         ),
       ),
       child: BlocBuilder<DataCollectorBloc, DataCollectorState>(
         builder: (context, state) {
           if (state is DataCollectionInitState) {
-            return const Center(child: LinearProgressIndicator(
-              color: ColorConstant.backgroundColorA,
-              backgroundColor: ColorConstant.navBarColorLeft,
-            ));
+            return const Center(
+                child:Text("Fetching Data..."));
           } else if (state is DataCollectionCompletedState) {
             return _DataDisplay(
               screenWidth: screenWidth,
@@ -166,14 +235,14 @@ class _DataDisplay extends StatelessWidget {
         const SizedBox(height: 10),
         CustomAppBar(
             width: screenWidth, state: state, dataNetworks: dataNetworks),
-         ProfilePic(animationTop: animationTop),
+        ProfilePic(animationTop: animationTop),
         ShowIntro(
             width: screenWidth,
             introText:
                 "Crafting seamless experiences through Flutter expertise 🚀📱."),
         ShowButton(dataNetworks: dataNetworks),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(top: 10, left: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -195,93 +264,93 @@ class _DataDisplay extends StatelessWidget {
             color: ColorConstant.navBarColorLeft,
           ),
         ),
-       Padding(
-         padding: const EdgeInsets.only(bottom: 20.0),
-         child: Flex(
-           direction: screenWidth >= 650 ? Axis.horizontal : Axis.vertical,
-           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-           crossAxisAlignment: CrossAxisAlignment.start,
-           children: [
-             Padding(
-               padding: const EdgeInsets.all(5.0),
-               child: SizedBox(
-                 width: screenWidth >= 650 ? (screenWidth / 2)-50 : null,
-                 child: RichText(
-                     text: TextSpan(
-                         text: "${state.gitData.experience[0].name}\n",
-                         style: Theme.of(context)
-                             .textTheme
-                             .bodyMedium
-                             ?.copyWith(fontWeight: FontWeight.bold),
-                         children: [
-                           TextSpan(
-                               text: "${state.gitData.experience[0].from} - ",
-                               style:
-                               const TextStyle(fontWeight: FontWeight.normal)),
-                           TextSpan(
-                               text: "${state.gitData.experience[0].to}\n\n",
-                               style:
-                               const TextStyle(fontWeight: FontWeight.normal)),
-                           ...state.gitData.experience[0].desc.map((data) =>
-                               TextSpan(
-                                   text: "╭ $data\n",
-                                   style: const TextStyle(
-                                       fontWeight: FontWeight.normal)))
-                         ])),
-               ),
-             ),
-             Padding(
-               padding: EdgeInsets.symmetric(
-                   vertical: screenWidth >= 650 ? 5 : 0,
-                   horizontal: screenWidth >= 650 ? 0 : 5),
-               child: screenWidth >= 650
-                   ?  const VerticalDivider(
-                 key: ValueKey('VerticalDivider'),
-                 endIndent: 10,
-                 indent: 10,
-                 width: 10,
-                 thickness: 1,
-                 color:Colors.black,
-                 // color: ColorConstant.navBarColorLeft
-               )
-                   : const Divider(
-                 key: ValueKey('HorizontalDivider'),
-                 height: 1,
-                 thickness: 1,
-                 color: ColorConstant.navBarColorLeft,
-               ),
-             ),
-             Padding(
-               padding: const EdgeInsets.all(8.0),
-               child: SizedBox(
-                 width: screenWidth >= 650 ? (screenWidth / 2)-50 : null,
-                 child: RichText(
-                     text: TextSpan(
-                         text: "${state.gitData.experience[1].name}\n",
-                         style: Theme.of(context)
-                             .textTheme
-                             .bodyMedium
-                             ?.copyWith(fontWeight: FontWeight.bold),
-                         children: [
-                           TextSpan(
-                               text: "${state.gitData.experience[1].from} - ",
-                               style:
-                               const TextStyle(fontWeight: FontWeight.normal)),
-                           TextSpan(
-                               text: "${state.gitData.experience[1].to}\n\n",
-                               style:
-                               const TextStyle(fontWeight: FontWeight.normal)),
-                           ...state.gitData.experience[1].desc.map((data) =>
-                               TextSpan(
-                                   text: "╭ $data\n",
-                                   style: const TextStyle(
-                                       fontWeight: FontWeight.normal)))
-                         ])),
-               ),
-             )
-           ],
-         ),
-       ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 30.0),
+          child: Flex(
+            direction: screenWidth >= 650 ? Axis.horizontal : Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: SizedBox(
+                  width: screenWidth >= 650 ? (screenWidth / 2) - 50 : null,
+                  child: RichText(
+                      text: TextSpan(
+                          text: "${state.gitData.experience[0].name}\n",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                          children: [
+                        TextSpan(
+                            text: "${state.gitData.experience[0].from} - ",
+                            style:
+                                const TextStyle(fontWeight: FontWeight.normal)),
+                        TextSpan(
+                            text: "${state.gitData.experience[0].to}\n\n",
+                            style:
+                                const TextStyle(fontWeight: FontWeight.normal)),
+                        ...state.gitData.experience[0].desc.map((data) =>
+                            TextSpan(
+                                text: "╭ $data\n",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.normal)))
+                      ])),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: screenWidth >= 650 ? 5 : 0,
+                    horizontal: screenWidth >= 650 ? 0 : 5),
+                child: screenWidth >= 650
+                    ? const VerticalDivider(
+                        key: ValueKey('VerticalDivider'),
+                        endIndent: 10,
+                        indent: 10,
+                        width: 10,
+                        thickness: 1,
+                        color: Colors.black,
+                        // color: ColorConstant.navBarColorLeft
+                      )
+                    : const Divider(
+                        key: ValueKey('HorizontalDivider'),
+                        height: 1,
+                        thickness: 1,
+                        color: ColorConstant.navBarColorLeft,
+                      ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: screenWidth >= 650 ? (screenWidth / 2) - 50 : null,
+                  child: RichText(
+                      text: TextSpan(
+                          text: "${state.gitData.experience[1].name}\n",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                          children: [
+                        TextSpan(
+                            text: "${state.gitData.experience[1].from} - ",
+                            style:
+                                const TextStyle(fontWeight: FontWeight.normal)),
+                        TextSpan(
+                            text: "${state.gitData.experience[1].to}\n\n",
+                            style:
+                                const TextStyle(fontWeight: FontWeight.normal)),
+                        ...state.gitData.experience[1].desc.map((data) =>
+                            TextSpan(
+                                text: "╭ $data\n",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.normal)))
+                      ])),
+                ),
+              )
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -329,8 +398,8 @@ class _FooterContainer extends StatelessWidget {
           bottom: BorderSide(color: Colors.grey.shade300),
         ),
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(100),
-          topRight: Radius.circular(100),
+          topLeft: Radius.circular(50),
+          topRight: Radius.circular(50),
         ),
       ),
       height: MediaQuery.of(context).size.height / 2,

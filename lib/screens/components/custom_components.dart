@@ -53,7 +53,12 @@ class NavBarButtonLeft extends StatelessWidget {
             child: CustomRoundedButton(
               text: "Email",
               isEmail: true,
-              onPressed: () {},
+              onPressed: () async{
+                await Clipboard.setData(
+                    const ClipboardData(text: "tejasgathekar78@gmail.com"))
+                    .then((_) => context.mounted?ScaffoldMessenger.of(context)
+                    .showSnackBar(const SnackBar(content: Text("Copied"))): null);
+              },
             ),
           )
               : GrayBackgroundContainer(
@@ -71,8 +76,8 @@ class NavBarButtonLeft extends StatelessWidget {
                   onPressed: () async {
                     await Clipboard.setData(
                         const ClipboardData(text: "tejasgathekar78@gmail.com"))
-                        .then((_) => ScaffoldMessenger.of(context)
-                        .showSnackBar(const SnackBar(content: Text("Copied"))));
+                        .then((_) => context.mounted?ScaffoldMessenger.of(context)
+                        .showSnackBar(const SnackBar(content: Text("Copied"))): null);;
                   },
                 ),
               ],
