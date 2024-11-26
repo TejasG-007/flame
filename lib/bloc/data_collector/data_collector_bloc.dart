@@ -6,14 +6,13 @@ import 'package:bloc/bloc.dart';
 import 'package:porfoliov7/networks/data_networks_nwt.dart';
 
 class DataCollectorBloc extends Bloc<DataCollectorEvent, DataCollectorState> {
-  final dataNetworks = DataNetworks();
+  final dataNetworks = DataNetworks.instance;
 
   DataCollectorBloc() : super(DataCollectionInitState()) {
     on<DataCollectionInitEvent>(_onInitState);
     // on<DataCollectionFailedEvent>(
     //         (event, emit) => emit(DataCollectionFailedState()));
   }
-
   Future<void> _onInitState(
       DataCollectionInitEvent event, Emitter<DataCollectorState> emit) async {
     try {

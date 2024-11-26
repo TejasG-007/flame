@@ -5,6 +5,12 @@ import 'package:porfoliov7/model/git_data.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DataNetworks {
+
+  DataNetworks._internalInstance();
+
+  static final DataNetworks instance = DataNetworks._internalInstance();
+
+
   final String url =
       "https://raw.githubusercontent.com/TejasG-007/ProjectData/main/projectdata.json";
 
