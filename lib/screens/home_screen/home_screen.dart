@@ -5,8 +5,8 @@ import 'package:porfoliov7/bloc/data_collector/data_collector_state.dart';
 import 'package:porfoliov7/networks/data_networks_nwt.dart';
 import 'package:porfoliov7/screens/components/custom_components.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../bloc/data_collector/data_collector_event.dart';
 import '../components/constant/color_constant.dart';
+import 'package:universal_html/html.dart' as html;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -109,6 +109,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 return Container(
                                   margin: const EdgeInsets.all(15),
                                   child: GridView.builder(
+                                    primary: true,
                                       shrinkWrap: true,
                                       itemCount:
                                           state.gitData.projectData.length,
@@ -270,9 +271,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 );
                               } else {
                                 return _ErrorDisplay(onRetry: () {
-                                  context
-                                      .read<DataCollectorBloc>()
-                                      .add(RetryFetchEvent());
+                                  html.window.location.reload();
                                 });
                               }
                             },
@@ -351,7 +350,7 @@ class _MainContent extends StatelessWidget {
             );
           } else {
             return _ErrorDisplay(onRetry: () {
-              //context.read<DataCollectorBloc>().add(RetryFetchEvent());
+             html.window.location.reload();
             });
           }
         },
@@ -520,9 +519,16 @@ class _ErrorDisplay extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)
+              )
+            ),
             onPressed: onRetry,
-            child: const Text("Retry"),
+            child: const Text("Retry",style: TextStyle(color: Colors.black),),
           ),
+          const SizedBox(height: 10,)
         ],
       ),
     );
@@ -576,15 +582,18 @@ class ClickButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        style: ButtonStyle(
-          enableFeedback: true,
-          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-        ),
-        onPressed: () async {
-          await launchUrl(Uri.parse(url));
-        },
-        child: Text(isWeb ? "WebUrl" : "GitHub"));
+    return Padding(
+      padding: const EdgeInsets.only(left: 5.0),
+      child: TextButton(
+          style: ButtonStyle(
+            enableFeedback: true,
+            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+          ),
+          onPressed: () async {
+            await launchUrl(Uri.parse(url));
+          },
+          child: Text(isWeb ? "WebUrl" : "GitHub")),
+    );
   }
 }
