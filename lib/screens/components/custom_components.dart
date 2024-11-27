@@ -308,8 +308,12 @@ class ProfilePic extends StatelessWidget {
           backgroundColor: Colors.white,
           child: CircleAvatar(
             radius: 80,
-            backgroundImage: NetworkImage(
-              "https://raw.githubusercontent.com/TejasG-007/flame/main/assets/profilepic.png",
+            backgroundImage: ResizeImage(
+              NetworkImage(
+                "https://raw.githubusercontent.com/TejasG-007/flame/main/assets/profilepic.png",
+              ),
+              width: 250, // Resize width
+              height: 320, // Resize height
             ),
           ),
         ),

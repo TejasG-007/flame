@@ -166,17 +166,37 @@ class _HomeScreenState extends State<HomeScreen>
                                                       children: [
                                                         Expanded(
                                                             flex: 1,
-                                                            child: Image.network(
-                                                              state
-                                                                  .gitData
-                                                                  .projectData[
-                                                                      index]
-                                                                  .images
-                                                                  .first,
+                                                            child:
+
+                                                            Image.network(
+                                                              state.gitData.projectData[index].images.first,
                                                               fit: BoxFit.fill,
-                                                              alignment: Alignment
-                                                                  .center,
-                                                            )),
+                                                              alignment: Alignment.center,
+                                                              loadingBuilder: (context, child, progress) {
+                                                                if (progress == null) {
+                                                                  // Replace the child with resized image once loaded
+                                                                  return Image(
+                                                                    image: ResizeImage(
+                                                                      NetworkImage(
+                                                                        state.gitData.projectData[index].images.first,
+                                                                      ),
+                                                                      width: 200, // Resize width
+                                                                      height: 150, // Resize height
+                                                                    ),
+                                                                    fit: BoxFit.fill,
+                                                                    alignment: Alignment.center,
+                                                                  );
+                                                                } else {
+                                                                  // Display a loading indicator while the image is loading
+                                                                  return LinearProgressIndicator(
+                                                                    value: progress.cumulativeBytesLoaded /
+                                                                        (progress.expectedTotalBytes ?? 1),
+                                                                    color: Colors.red,
+                                                                  );
+                                                                }
+                                                              },
+                                                            )
+                                                        ),
                                                         const VerticalDivider(
                                                           color: ColorConstant
                                                               .navBarColorLeft,
