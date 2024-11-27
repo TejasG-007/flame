@@ -51,235 +51,239 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           LayoutBuilder(
             builder: (context, size) {
-              return ListView(
+              return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                children: [
-                  _MainContent(
-                    screenHeight: size.maxHeight,
-                    screenWidth: size.maxWidth,
-                    dataNetworks: _dataNetworks,
-                    animationTop: _animationTop,
-                  ),
-                  Container(
-                      decoration: BoxDecoration(
-                        color: ColorConstant.backgroundColorA,
-                        border: Border(
-                          bottom: BorderSide(color: Colors.grey.shade300),
+                child: Column(
+                  children: [
+                    _MainContent(
+                      screenHeight: size.maxHeight,
+                      screenWidth: size.maxWidth,
+                      dataNetworks: _dataNetworks,
+                      animationTop: _animationTop,
+                    ),
+                    Container(
+                        decoration: BoxDecoration(
+                          color: ColorConstant.backgroundColorA,
+                          border: Border(
+                            bottom: BorderSide(color: Colors.grey.shade300),
+                          ),
+                          borderRadius: BorderRadius.circular(50),
                         ),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, left: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Project's And Achievement's ",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall
-                                      ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                ),
-                              ],
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10, left: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Project's And Achievement's ",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: screenWidth >= 650 ? 5 : 0,
-                                horizontal: screenWidth >= 650 ? 0 : 5),
-                            child: const Divider(
-                              key: ValueKey('HorizontalDivider'),
-                              height: 1,
-                              thickness: 1,
-                              color: ColorConstant.navBarColorLeft,
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screenWidth >= 650 ? 5 : 0,
+                                  horizontal: screenWidth >= 650 ? 0 : 5),
+                              child: const Divider(
+                                key: ValueKey('HorizontalDivider'),
+                                height: 1,
+                                thickness: 1,
+                                color: ColorConstant.navBarColorLeft,
+                              ),
                             ),
-                          ),
-                          BlocBuilder<DataCollectorBloc, DataCollectorState>(
-                            builder: (context, state) {
-                              if (state is DataCollectionInitState) {
-                                return const Center(
-                                    child: Text("Fetching Data..."));
-                              } else if (state
-                                  is DataCollectionCompletedState) {
-                                return Container(
-                                  margin: const EdgeInsets.all(15),
-                                  child: GridView.builder(
-                                    primary: true,
-                                      shrinkWrap: true,
-                                      itemCount:
-                                          state.gitData.projectData.length,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: screenWidth <= 650
-                                                  ? 1
-                                                  : screenWidth <= 1080
-                                                      ? 2
-                                                      : 3,
-                                              crossAxisSpacing: 10,
-                                              mainAxisSpacing: 10,
-                                              mainAxisExtent: 250),
-                                      itemBuilder: (context, index) =>
-                                          Container(
-                                            alignment: Alignment.topCenter,
-                                            margin: const EdgeInsets.only(
-                                                bottom: 8),
-                                            child: Material(
-                                              borderRadius:
-                                                  BorderRadius.circular(40),
-                                              clipBehavior:
-                                                  Clip.antiAliasWithSaveLayer,
-                                              child: InkWell(
-                                                onTap: () {},
-                                                hoverColor: Colors.black,
+                            BlocBuilder<DataCollectorBloc, DataCollectorState>(
+                              builder: (context, state) {
+                                if (state is DataCollectionInitState) {
+                                  return const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Center(
+                                        child: Text("Fetching Data...")),
+                                  );
+                                } else if (state
+                                    is DataCollectionCompletedState) {
+                                  return Container(
+                                    margin: const EdgeInsets.all(15),
+                                    child: GridView.builder(
+                                      primary: true,
+                                        shrinkWrap: true,
+                                        itemCount:
+                                            state.gitData.projectData.length,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: screenWidth <= 650
+                                                    ? 1
+                                                    : screenWidth <= 1080
+                                                        ? 2
+                                                        : 3,
+                                                crossAxisSpacing: 10,
+                                                mainAxisSpacing: 10,
+                                                mainAxisExtent: 250),
+                                        itemBuilder: (context, index) =>
+                                            Container(
+                                              alignment: Alignment.topCenter,
+                                              margin: const EdgeInsets.only(
+                                                  bottom: 8),
+                                              child: Material(
                                                 borderRadius:
                                                     BorderRadius.circular(40),
-                                                child: Container(
-                                                  alignment: Alignment.center,
-                                                  margin:
-                                                      const EdgeInsets.all(1.5),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                          color: Colors
-                                                              .grey.shade300,
-                                                          spreadRadius: 1)
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40),
-                                                  ),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Expanded(
-                                                          flex: 1,
-                                                          child: Image.network(
-                                                            state
-                                                                .gitData
-                                                                .projectData[
-                                                                    index]
-                                                                .images
-                                                                .first,
-                                                            fit: BoxFit.fill,
-                                                            alignment: Alignment
-                                                                .center,
-                                                          )),
-                                                      const VerticalDivider(
-                                                        color: ColorConstant
-                                                            .navBarColorLeft,
-                                                        width: 1,
-                                                      ),
-                                                      Expanded(
-                                                        flex: 3,
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .stretch,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      top: 8,
-                                                                      left: 10,
-                                                                      right:
-                                                                          15),
-                                                              child: Text(
-                                                                  state
-                                                                      .gitData
-                                                                      .projectData[
-                                                                          index]
-                                                                      .name,
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .bodySmall
-                                                                      ?.copyWith(
-                                                                          fontWeight:
-                                                                              FontWeight.bold)),
-                                                            ),
-                                                            const Divider(
-                                                              height: 1,
-                                                              color: ColorConstant
-                                                                  .navBarColorLeft,
-                                                            ),
-                                                            Padding(
+                                                clipBehavior:
+                                                    Clip.antiAliasWithSaveLayer,
+                                                child: InkWell(
+                                                  onTap: () {},
+                                                  hoverColor: Colors.black,
+                                                  borderRadius:
+                                                      BorderRadius.circular(40),
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    margin:
+                                                        const EdgeInsets.all(1.5),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                            color: Colors
+                                                                .grey.shade300,
+                                                            spreadRadius: 1)
+                                                      ],
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                            flex: 1,
+                                                            child: Image.network(
+                                                              state
+                                                                  .gitData
+                                                                  .projectData[
+                                                                      index]
+                                                                  .images
+                                                                  .first,
+                                                              fit: BoxFit.fill,
+                                                              alignment: Alignment
+                                                                  .center,
+                                                            )),
+                                                        const VerticalDivider(
+                                                          color: ColorConstant
+                                                              .navBarColorLeft,
+                                                          width: 1,
+                                                        ),
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .stretch,
+                                                            children: [
+                                                              Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .all(2),
+                                                                        .only(
+                                                                        top: 8,
+                                                                        left: 10,
+                                                                        right:
+                                                                            15),
                                                                 child: Text(
-                                                                  state
-                                                                      .gitData
-                                                                      .projectData[
-                                                                          index]
-                                                                      .desc,
-                                                                  maxLines: 8,
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .start,
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                )),
-                                                            const Divider(
-                                                              height: 1,
-                                                              color: ColorConstant
-                                                                  .navBarColorLeft,
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                ClickButton(
                                                                     state
-                                                                            .gitData
-                                                                            .projectData[index]
-                                                                            .gitLink ??
-                                                                        "",
-                                                                    false),
-                                                                state
-                                                                            .gitData
-                                                                            .projectData[
-                                                                                index]
-                                                                            .webLink !=
-                                                                        null
-                                                                    ? ClickButton(
-                                                                        state.gitData.projectData[index].webLink ??
-                                                                            "",
-                                                                        true)
-                                                                    : const SizedBox
-                                                                        .shrink()
-                                                              ],
-                                                            )
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
+                                                                        .gitData
+                                                                        .projectData[
+                                                                            index]
+                                                                        .name,
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .bodySmall
+                                                                        ?.copyWith(
+                                                                            fontWeight:
+                                                                                FontWeight.bold)),
+                                                              ),
+                                                              const Divider(
+                                                                height: 1,
+                                                                color: ColorConstant
+                                                                    .navBarColorLeft,
+                                                              ),
+                                                              Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(2),
+                                                                  child: Text(
+                                                                    state
+                                                                        .gitData
+                                                                        .projectData[
+                                                                            index]
+                                                                        .desc,
+                                                                    maxLines: 8,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .start,
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                  )),
+                                                              const Divider(
+                                                                height: 1,
+                                                                color: ColorConstant
+                                                                    .navBarColorLeft,
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  ClickButton(
+                                                                      state
+                                                                              .gitData
+                                                                              .projectData[index]
+                                                                              .gitLink ??
+                                                                          "",
+                                                                      false),
+                                                                  state
+                                                                              .gitData
+                                                                              .projectData[
+                                                                                  index]
+                                                                              .webLink !=
+                                                                          null
+                                                                      ? ClickButton(
+                                                                          state.gitData.projectData[index].webLink ??
+                                                                              "",
+                                                                          true)
+                                                                      : const SizedBox
+                                                                          .shrink()
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          )),
-                                );
-                              } else {
-                                return _ErrorDisplay(onRetry: () {
-                                  html.window.location.reload();
-                                });
-                              }
-                            },
-                          )
-                        ],
-                      )),
-                  _FooterContainer(screenWidth: size.maxWidth),
-                ],
+                                            )),
+                                  );
+                                } else {
+                                  return _ErrorDisplay(onRetry: () {
+                                    html.window.location.reload();
+                                  });
+                                }
+                              },
+                            )
+                          ],
+                        )),
+                    _FooterContainer(screenWidth: size.maxWidth),
+                  ],
+                ),
               );
             },
           ),
@@ -339,7 +343,10 @@ class _MainContent extends StatelessWidget {
       child: BlocBuilder<DataCollectorBloc, DataCollectorState>(
         builder: (context, state) {
           if (state is DataCollectionInitState) {
-            return const Center(child: Text("Fetching Data..."));
+            return const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(child: Text("Fetching Data...")),
+            );
           } else if (state is DataCollectionCompletedState) {
             return _DataDisplay(
               screenWidth: screenWidth,
