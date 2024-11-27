@@ -4,6 +4,7 @@ import 'package:porfoliov7/bloc/data_collector/data_collector_bloc.dart';
 import 'package:porfoliov7/bloc/data_collector/data_collector_state.dart';
 import 'package:porfoliov7/networks/data_networks_nwt.dart';
 import 'package:porfoliov7/screens/components/custom_components.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../bloc/data_collector/data_collector_event.dart';
 import '../components/constant/color_constant.dart';
 
@@ -236,22 +237,25 @@ class _HomeScreenState extends State<HomeScreen>
                                                             ),
                                                             Row(
                                                               children: [
-                                                                TextButton(
-                                                                    onPressed:
-                                                                        () {},
-                                                                    child: const Text(
-                                                                        "GitHub")),
+                                                                ClickButton(
+                                                                    state
+                                                                            .gitData
+                                                                            .projectData[index]
+                                                                            .gitLink ??
+                                                                        "",
+                                                                    false),
                                                                 state
                                                                             .gitData
                                                                             .projectData[
                                                                                 index]
                                                                             .webLink !=
                                                                         null
-                                                                    ? TextButton(
-                                                                        onPressed:
-                                                                            () {},
-                                                                        child: const Text(
-                                                                            "WebUrl")):const SizedBox.shrink()
+                                                                    ? ClickButton(
+                                                                        state.gitData.projectData[index].webLink ??
+                                                                            "",
+                                                                        true)
+                                                                    : const SizedBox
+                                                                        .shrink()
                                                               ],
                                                             )
                                                           ],
@@ -562,5 +566,25 @@ class _FooterContainer extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ClickButton extends StatelessWidget {
+  const ClickButton(this.url, this.isWeb, {super.key});
+  final String url;
+  final bool isWeb;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        style: ButtonStyle(
+          enableFeedback: true,
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+        ),
+        onPressed: () async {
+          await launchUrl(Uri.parse(url));
+        },
+        child: Text(isWeb ? "WebUrl" : "GitHub"));
   }
 }

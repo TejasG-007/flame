@@ -10,9 +10,8 @@ class DataCollectorBloc extends Bloc<DataCollectorEvent, DataCollectorState> {
 
   DataCollectorBloc() : super(DataCollectionInitState()) {
     on<DataCollectionInitEvent>(_onInitState);
-    // on<DataCollectionFailedEvent>(
-    //         (event, emit) => emit(DataCollectionFailedState()));
   }
+
   Future<void> _onInitState(
       DataCollectionInitEvent event, Emitter<DataCollectorState> emit) async {
     try {
